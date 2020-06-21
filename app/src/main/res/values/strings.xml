@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">WanAndroid</string>
+
+    <string name="tab_home">首页</string>
+    <string name="tab_knowledge">知识</string>
+    <string name="tab_navigation">导航</string>
+    <string name="tab_project">项目</string>
 </resources>
