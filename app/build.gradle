@@ -21,6 +21,12 @@ android {
     }
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation 'com.android.support:appcompat-v7:27.0.1'
@@ -34,4 +40,7 @@ dependencies {
     // butterknife
     implementation 'com.jakewharton:butterknife:8.5.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    // tools
+    implementation(name: 'tool-v1.0-17-g52d4106-2020-06-22_19-11', ext: 'aar')
 }
