@@ -58,5 +58,5 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
 
     // tools
-    implementation(name: 'tool-v1.0-17-g52d4106-2020-06-22_19-11', ext: 'aar')
+    implementation(name: 'tool-v1.0-18-g79c8427-2020-06-24_18-16', ext: 'aar')
 }
