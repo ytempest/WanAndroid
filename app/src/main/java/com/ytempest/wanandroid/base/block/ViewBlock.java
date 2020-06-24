@@ -1,8 +1,6 @@
 package com.ytempest.wanandroid.base.block;
 
-import android.support.annotation.IdRes;
-import android.support.annotation.LayoutRes;
-import android.view.View;
+import butterknife.ButterKnife;
 
 /**
  * @author heqidu
@@ -10,11 +8,9 @@ import android.view.View;
  */
 public abstract class ViewBlock extends Block {
 
-    protected void setContentView(@LayoutRes int layoutResID) {
-        getHost().setContentView(layoutResID);
-    }
-
-    protected <V extends View> V findViewById(@IdRes int id) {
-        return getHost().findViewById(id);
+    @Override
+    protected void setContentView(int layoutResID) {
+        super.setContentView(layoutResID);
+        ButterKnife.bind(this, getHost());
     }
 }

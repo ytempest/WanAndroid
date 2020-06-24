@@ -6,6 +6,10 @@ import android.arch.lifecycle.LifecycleOwner;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
+import android.support.annotation.NonNull;
+import android.view.View;
 import android.view.Window;
 
 /**
@@ -32,6 +36,7 @@ public class Block implements IBlock, GenericLifecycleObserver {
         return mHost;
     }
 
+    @NonNull
     protected <T extends Block> T getBlock(Class<T> clazz) {
         return mHost.getBlock(clazz);
     }
@@ -103,6 +108,14 @@ public class Block implements IBlock, GenericLifecycleObserver {
     }
 
     /*Delegate*/
+
+    protected void setContentView(@LayoutRes int layoutResID) {
+        getHost().setContentView(layoutResID);
+    }
+
+    protected <V extends View> V findViewById(@IdRes int id) {
+        return getHost().findViewById(id);
+    }
 
     protected Window getWindow() {
         return mHost.getWindow();

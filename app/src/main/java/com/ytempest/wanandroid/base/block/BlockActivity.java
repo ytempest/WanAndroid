@@ -39,7 +39,7 @@ public abstract class BlockActivity extends BaseActivity {
     protected abstract void onCreateBlocks(List<IBlock> blocks);
 
     @NonNull
-    public <T extends Block> T getBlock(Class<T> clazz) {
+    <T extends Block> T getBlock(Class<T> clazz) {
         if (mBlockCaches != null && mBlockCaches.containsKey(clazz)) {
             return (T) mBlockCaches.get(clazz);
         }
