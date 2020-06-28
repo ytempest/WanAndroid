@@ -1,24 +1,23 @@
 package com.ytempest.wanandroid.activity.main.home;
 
-import com.ytempest.wanandroid.R;
-import com.ytempest.wanandroid.base.unit.IUnit;
-import com.ytempest.wanandroid.base.unit.UnitFragment;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
-import java.util.List;
+import com.ytempest.wanandroid.R;
+import com.ytempest.wanandroid.base.BaseFragment;
 
 /**
  * @author heqidu
  * @since 2020/6/23
  */
-public class HomeFrag extends UnitFragment {
-
+public class HomeFrag extends BaseFragment {
+    @Nullable
     @Override
-    protected int getLayoutId() {
-        return R.layout.frag_home;
-    }
-
-    @Override
-    protected void onCreateUnits(List<IUnit> units) {
-        units.add(new HomeViewUnit());
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.frag_home, container, false);
     }
 }
