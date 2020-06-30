@@ -2,6 +2,7 @@ package com.ytempest.wanandroid.di.component;
 
 import com.ytempest.wanandroid.base.WanApp;
 import com.ytempest.wanandroid.di.module.AllActivityModule;
+import com.ytempest.wanandroid.di.module.AllFragmentModule;
 import com.ytempest.wanandroid.di.module.InteractorModule;
 
 import javax.inject.Singleton;
@@ -18,6 +19,7 @@ import dagger.android.support.AndroidSupportInjectionModule;
 @Component(modules = {AndroidInjectionModule.class,
         AndroidSupportInjectionModule.class,
         AllActivityModule.class,
+        AllFragmentModule.class,
         InteractorModule.class})
 public interface AppComponent {
     void inject(WanApp app);

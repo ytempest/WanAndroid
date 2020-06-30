@@ -7,7 +7,7 @@ import com.ytempest.wanandroid.base.view.IView;
  * @author heqidu
  * @since 2020/6/28
  */
-public class IMainContract {
+public interface IMainContract {
     interface View extends IView {
     }
 
