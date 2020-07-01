@@ -1,24 +1,17 @@
 package com.ytempest.wanandroid.activity.main.navigation;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.ytempest.wanandroid.R;
-import com.ytempest.wanandroid.base.BaseFragment;
+import com.ytempest.wanandroid.base.fragment.MvpFragment;
 
 /**
  * @author heqidu
  * @since 2020/6/23
  */
-public class NavigationFrag extends BaseFragment {
+public class NavigationFrag extends MvpFragment<NavaigationPresenter> implements INavigationContract.View {
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_navigation, container, false);
+    protected int getLayoutId() {
+        return R.layout.frag_navigation;
     }
+
 }
