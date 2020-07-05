@@ -4,21 +4,18 @@ import android.support.v4.app.Fragment;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.tool.helper.ExpandFragHelper;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.activity.MvpActivity;
 
 import butterknife.BindView;
 
+@InjectLayout(R.layout.activity_main)
 public class MainActivity extends MvpActivity<MainPresenter> implements IMainContract.View {
 
     @BindView(R.id.navigationBar_main_content)
     BottomNavigationBar mNavigationBar;
-
-    @Override
-    protected int getLayoutId() {
-        return R.layout.activity_main;
-    }
 
     @Override
     protected void onViewCreated() {

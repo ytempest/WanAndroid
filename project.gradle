@@ -9,12 +9,13 @@ buildscript {
     ]
 
     ext.depsVersions = [
-            "supportLib" : '28.0.0',
-            "arch"       : '1.1.1',
-            "dagger"     : "2.15",
-            "butterknife": "8.5.1",
-            "retrofit"   : "2.4.0",
-            "rxjava"     : "2.0.2",
+            "supportLib"     : '28.0.0',
+            "arch"           : '1.1.1',
+            "dagger"         : "2.15",
+            "butterknife"    : "8.5.1",
+            "retrofit"       : "2.4.0",
+            "rxjava"         : "2.0.2",
+            "layout_injector": "1.1"
     ]
 
     ext.testImplementationDeps = [
@@ -58,6 +59,8 @@ buildscript {
             "retrofit"              : "com.squareup.retrofit2:retrofit:${depsVersions.retrofit}",
             "retrofit-rxjava"       : "com.squareup.retrofit2:adapter-rxjava2:${depsVersions.retrofit}",
             "retrofit-gson"         : "com.squareup.retrofit2:converter-gson:${depsVersions.retrofit}",
+
+            "layout-injector"       : "com.github.ytempest.layoutinjector:layoutinject:${depsVersions.layout_injector}",
     ]
 
     ext.annotationProcessorDeps = [
@@ -67,5 +70,7 @@ buildscript {
             // dagger
             "dagger-compiler"     : "com.google.dagger:dagger-compiler:${depsVersions.dagger}",
             "dagger-processor"    : "com.google.dagger:dagger-android-processor:${depsVersions.dagger}",
+
+            "layout-injector"       : "com.github.ytempest.layoutinjector:compiler:${depsVersions.layout_injector}",
     ]
 }

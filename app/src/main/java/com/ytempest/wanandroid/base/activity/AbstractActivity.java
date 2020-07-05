@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ytempest.layoutinjector.LayoutInjector;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -18,7 +20,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutId());
+        LayoutInjector.inject(this);
         mBind = ButterKnife.bind(this);
         onViewCreated();
     }
@@ -30,8 +32,6 @@ public abstract class AbstractActivity extends AppCompatActivity {
             mBind.unbind();
         }
     }
-
-    protected abstract int getLayoutId();
 
     protected abstract void onViewCreated();
 }

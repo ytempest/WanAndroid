@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.ytempest.layoutinjector.LayoutInjector;
+
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -19,12 +21,10 @@ public abstract class AbstractFragment extends Fragment {
 
     private Unbinder mBind;
 
-    protected abstract int getLayoutId();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), container, false);
+        View view = LayoutInjector.inject(this, inflater, container);
         mBind = ButterKnife.bind(this, view);
         return view;
     }
