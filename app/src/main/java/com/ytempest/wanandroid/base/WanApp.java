@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 
 import com.ytempest.tool.ToolModule;
+import com.ytempest.tool.util.LogUtils;
 import com.ytempest.wanandroid.di.component.AppComponent;
 import com.ytempest.wanandroid.di.component.DaggerAppComponent;
 
@@ -22,6 +23,8 @@ public class WanApp extends Application implements HasActivityInjector {
     public void onCreate() {
         super.onCreate();
         ToolModule.init(this);
+        LogUtils.setLogPrefix("WanAndroid");
+        LogUtils.setLoggable(true);
 
         AppComponent appComponent = DaggerAppComponent.builder().build();
         appComponent.inject(this);

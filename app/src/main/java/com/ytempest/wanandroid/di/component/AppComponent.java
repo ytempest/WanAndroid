@@ -4,6 +4,7 @@ import com.ytempest.wanandroid.base.WanApp;
 import com.ytempest.wanandroid.di.module.AllActivityModule;
 import com.ytempest.wanandroid.di.module.AllFragmentModule;
 import com.ytempest.wanandroid.di.module.InteractorModule;
+import com.ytempest.wanandroid.di.module.http.HttpModule;
 
 import javax.inject.Singleton;
 
@@ -20,7 +21,9 @@ import dagger.android.support.AndroidSupportInjectionModule;
         AndroidSupportInjectionModule.class,
         AllActivityModule.class,
         AllFragmentModule.class,
-        InteractorModule.class})
+        InteractorModule.class,
+        HttpModule.class,
+})
 public interface AppComponent {
     void inject(WanApp app);
 }

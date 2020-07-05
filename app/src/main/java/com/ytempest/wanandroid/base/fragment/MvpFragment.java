@@ -4,8 +4,10 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringRes;
 import android.view.View;
 
+import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.base.presenter.IPresenter;
 import com.ytempest.wanandroid.base.view.IView;
 
@@ -49,11 +51,11 @@ public abstract class MvpFragment<Presenter extends IPresenter> extends Abstract
 
     @Override
     public void showToast(String msg) {
-
+        ToastUtils.show(getContext(), msg);
     }
 
     @Override
-    public void showToast(int textId) {
-
+    public void showToast(@StringRes int textId) {
+        ToastUtils.show(getContext(), textId);
     }
 }
