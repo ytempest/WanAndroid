@@ -15,7 +15,8 @@ buildscript {
             "butterknife"    : "8.5.1",
             "retrofit"       : "2.4.0",
             "rxjava"         : "2.0.2",
-            "layout_injector": "1.1"
+            "layout_injector": "1.1",
+            "okhttp"         : "3.9.0",
     ]
 
     ext.testImplementationDeps = [
@@ -49,7 +50,8 @@ buildscript {
             "butterknife"           : "com.jakewharton:butterknife:${depsVersions.butterknife}",
 
             "gson"                  : "com.google.code.gson:gson:2.8.6",
-            "okhttp3"               : "com.squareup.okhttp3:logging-interceptor:4.7.2",
+            "okhttp"                : "com.squareup.okhttp3:okhttp:${depsVersions.okhttp}",
+            "okhttp-interceptor"    : "com.squareup.okhttp3:logging-interceptor:${depsVersions.okhttp}",
 
             // rxjava
             "rxjava"                : "io.reactivex.rxjava2:rxjava:${depsVersions.rxjava}",
@@ -71,6 +73,6 @@ buildscript {
             "dagger-compiler"     : "com.google.dagger:dagger-compiler:${depsVersions.dagger}",
             "dagger-processor"    : "com.google.dagger:dagger-android-processor:${depsVersions.dagger}",
 
-            "layout-injector"       : "com.github.ytempest.layoutinjector:compiler:${depsVersions.layout_injector}",
+            "layout-injector"     : "com.github.ytempest.layoutinjector:compiler:${depsVersions.layout_injector}",
     ]
 }
