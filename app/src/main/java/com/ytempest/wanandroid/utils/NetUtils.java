@@ -12,7 +12,7 @@ import android.support.annotation.RequiresPermission;
  */
 public class NetUtils {
     @RequiresPermission(Manifest.permission.ACCESS_NETWORK_STATE)
-    public static boolean isNetworkConnected(Context context) {
+    public static boolean isNetAvailable(Context context) {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (manager == null) {
             return false;
