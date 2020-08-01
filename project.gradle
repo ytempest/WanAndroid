@@ -15,6 +15,7 @@ buildscript {
             "butterknife"    : "8.5.1",
             "retrofit"       : "2.4.0",
             "rxjava"         : "2.0.2",
+            "okhttp"         : "3.9.0",
             "layout_injector": "1.0"
     ]
 
@@ -49,7 +50,8 @@ buildscript {
             "butterknife"           : "com.jakewharton:butterknife:${depsVersions.butterknife}",
 
             "gson"                  : "com.google.code.gson:gson:2.8.6",
-            "okhttp3"               : "com.squareup.okhttp3:logging-interceptor:4.7.2",
+            "okhttp"                : "com.squareup.okhttp3:okhttp:${depsVersions.okhttp}",
+            "okhttp-interceptor"    : "com.squareup.okhttp3:logging-interceptor:${depsVersions.okhttp}",
 
             // rxjava
             "rxjava"                : "io.reactivex.rxjava2:rxjava:${depsVersions.rxjava}",

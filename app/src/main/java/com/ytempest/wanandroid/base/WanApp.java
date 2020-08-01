@@ -19,11 +19,19 @@ import dagger.android.HasActivityInjector;
  * @since 2020/6/22
  */
 public class WanApp extends Application implements HasActivityInjector {
+
+    private static WanApp sInstance;
+
+    public static WanApp getApp() {
+        return sInstance;
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
+        sInstance = this;
         ToolModule.init(this);
-        LogUtils.setLogPrefix("WanAndroid");
+        LogUtils.setLogPrefix("[WanAndroid]: ");
         LogUtils.setLoggable(true);
 
         AppComponent appComponent = DaggerAppComponent.builder().build();
