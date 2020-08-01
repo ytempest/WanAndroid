@@ -1,9 +1,6 @@
 package com.ytempest.wanandroid.activity.main;
 
 import com.ytempest.wanandroid.base.presenter.BasePresenter;
-import com.ytempest.wanandroid.interactor.impl.BaseInteractor;
-
-import javax.inject.Inject;
 
 /**
  * @author heqidu
@@ -11,8 +8,4 @@ import javax.inject.Inject;
  */
 public class MainPresenter extends BasePresenter<IMainContract.View> implements IMainContract.Presenter {
 
-    @Inject
-    public MainPresenter(BaseInteractor interactor) {
-        super(interactor);
-    }
 }

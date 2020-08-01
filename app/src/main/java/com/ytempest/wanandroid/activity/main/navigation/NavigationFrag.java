@@ -9,6 +9,6 @@ import com.ytempest.wanandroid.base.fragment.MvpFragment;
  * @since 2020/6/23
  */
 @InjectLayout(R.layout.frag_navigation)
-public class NavigationFrag extends MvpFragment<NavaigationPresenter> implements INavigationContract.View {
+public class NavigationFrag extends MvpFragment<INavigationContract.Presenter> implements INavigationContract.View {
 
 }
