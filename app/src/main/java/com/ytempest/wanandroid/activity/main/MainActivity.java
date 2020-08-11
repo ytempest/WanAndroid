@@ -12,7 +12,7 @@ import com.ytempest.wanandroid.base.activity.MvpActivity;
 import butterknife.BindView;
 
 @InjectLayout(R.layout.activity_main)
-public class MainActivity extends MvpActivity<IMainContract.Presenter> implements IMainContract.View {
+public class MainActivity extends MvpActivity<MainPresenter> implements IMainContract.View {
 
     @BindView(R.id.navigationBar_main_content)
     BottomNavigationBar mNavigationBar;

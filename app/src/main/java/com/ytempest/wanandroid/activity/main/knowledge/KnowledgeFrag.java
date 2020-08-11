@@ -9,6 +9,6 @@ import com.ytempest.wanandroid.base.fragment.MvpFragment;
  * @since 2020/6/23
  */
 @InjectLayout(R.layout.frag_knowledge)
-public class KnowledgeFrag extends MvpFragment<IKnowledgeContract.Presenter> implements IKnowledgeContract.View {
+public class KnowledgeFrag extends MvpFragment<KnowledgePresenter> implements IKnowledgeContract.View {
 
 }

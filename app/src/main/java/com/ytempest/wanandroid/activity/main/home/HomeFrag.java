@@ -10,7 +10,7 @@ import com.ytempest.wanandroid.http.bean.HomeArticleBean;
  * @since 2020/6/23
  */
 @InjectLayout(R.layout.frag_home)
-public class HomeFrag extends MvpFragment<IHomeContract.Presenter> implements IHomeContract.View {
+public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContract.View {
 
     @Override
     public void displayHomeArticle(HomeArticleBean homeArticleBean) {

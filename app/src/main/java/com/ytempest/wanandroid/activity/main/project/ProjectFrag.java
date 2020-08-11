@@ -9,6 +9,6 @@ import com.ytempest.wanandroid.base.fragment.MvpFragment;
  * @since 2020/6/23
  */
 @InjectLayout(R.layout.frag_project)
-public class ProjectFrag extends MvpFragment<IProjectContract.Presenter> implements IProjectContract.View {
+public class ProjectFrag extends MvpFragment<ProjectPresenter> implements IProjectContract.View {
 
 }
