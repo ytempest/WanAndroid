@@ -24,7 +24,12 @@ public abstract class BaseObserver<T> extends DefaultObserver<BaseResp<T>> {
             return;
         }
 
-        if (!resp.isSuccess() || resp.getData() == null) {
+        if (!resp.isSuccess()) {
+            onFail(ErrCode.SRC_ERR, new DataErrException(resp.getErrorMsg()));
+            return;
+        }
+
+        if (resp.getData() == null) {
             onFail(ErrCode.DATA_ERR, new DataErrException(resp.getErrorMsg()));
             return;
         }
