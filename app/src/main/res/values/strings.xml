@@ -9,4 +9,13 @@
     <string name="get_data_fail">获取数据失败</string>
     <string name="request_fail">请求失败</string>
     <string name="unknown_err">未知错误</string>
+
+    <string name="login">登录</string>
+    <string name="login_account_hint">邮箱/手机号</string>
+    <string name="password">密码</string>
+    <string name="free_register">免费注册</string>
+    <string name="welcome_login_wanandroid">欢迎登录WanAndroid</string>
+    <string name="account_format_err">账号格式错误</string>
+    <string name="account_pwd_err">账号密码不匹配</string>
+
 </resources>

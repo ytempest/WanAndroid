@@ -10,6 +10,7 @@ import android.view.View;
 import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.base.presenter.IPresenter;
 import com.ytempest.wanandroid.base.view.IView;
+import com.ytempest.wanandroid.dialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -57,5 +58,23 @@ public abstract class MvpFragment<Presenter extends IPresenter> extends Abstract
     @Override
     public void showToast(@StringRes int textId) {
         ToastUtils.show(getContext(), textId);
+    }
+
+    private LoadingDialog mLoadingDialog;
+
+    @Override
+    public void showLoading() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(getContext());
+            mLoadingDialog.setAutoDismiss(getLifecycle());
+        }
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void stopLoading() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
     }
 }

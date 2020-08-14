@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="ModifiableButton">
+        <attr name="disable_text_color" format="color" />
+        <attr name="normal_text_color" format="color" />
+        <attr name="disable_bg" format="color|reference" />
+        <attr name="normal_bg" format="color|reference" />
+    </declare-styleable>
+</resources>

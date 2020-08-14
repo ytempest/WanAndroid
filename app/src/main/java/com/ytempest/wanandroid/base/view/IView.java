@@ -10,4 +10,8 @@ public interface IView {
     void showToast(String msg);
 
     void showToast(@StringRes int textId);
+
+    void showLoading();
+
+    void stopLoading();
 }
