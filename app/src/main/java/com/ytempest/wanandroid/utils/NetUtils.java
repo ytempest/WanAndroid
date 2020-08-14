@@ -17,8 +17,7 @@ public class NetUtils {
         if (manager == null) {
             return false;
         }
-
         NetworkInfo networkInfo = manager.getActiveNetworkInfo();
-        return networkInfo.isConnected() && networkInfo.isAvailable();
+        return networkInfo != null && networkInfo.isConnected() && networkInfo.isAvailable();
     }
 }
