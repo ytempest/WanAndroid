@@ -14,6 +14,7 @@ import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.listener.PasswordStatusChangeListener;
 import com.ytempest.wanandroid.listener.TextWatcherListener;
 import com.ytempest.wanandroid.utils.RegexUtils;
+import com.ytempest.wanandroid.utils.SpaceInputFilter;
 import com.ytempest.wanandroid.widget.ModifiableButton;
 
 import butterknife.BindView;
@@ -41,8 +42,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements ILogin
         mPwdStatusView.setOnClickListener(new PasswordStatusChangeListener(mPasswordET));
 
         // EditText空格过滤器
-        InputFilter spaceFilter = (source, start, end, dest, dstart, dend) -> source.toString().equals(" ") ? "" : null;
-        InputFilter[] filters = new InputFilter[]{spaceFilter};
+        InputFilter[] filters = new InputFilter[]{new SpaceInputFilter()};
         mAccountET.setFilters(filters);
         mPasswordET.setFilters(filters);
 
@@ -85,12 +85,15 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements ILogin
     }
 
     @Override
-    public void onLoginFail(@ErrCode int code) {
+    public void onLoginFail(@ErrCode int code, Throwable throwable) {
         if (code == ErrCode.NET_ERR) {
             showToast(R.string.net_err);
 
         } else if (code == ErrCode.DATA_ERR) {
             showToast(R.string.account_pwd_err);
+
+        } else if (code == ErrCode.SRC_ERR) {
+            showToast(throwable.getMessage());
 
         } else {
             showToast(R.string.unknown_err);

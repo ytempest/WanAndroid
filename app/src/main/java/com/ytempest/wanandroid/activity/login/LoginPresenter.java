@@ -26,7 +26,7 @@ public class LoginPresenter extends BasePresenter<ILoginContract.View> implement
                 .subscribe(new OptionalObserver<LoginBean>()
                         .doOnStart(aVoid -> mView.showLoading())
                         .doOnSuccess(loginBean -> mView.onLoginSuccess(loginBean))
-                        .doOnFail((code, throwable) -> mView.onLoginFail(code))
+                        .doOnFail((code, throwable) -> mView.onLoginFail(code, throwable))
                         .doOnCompleted(aVoid -> mView.stopLoading())
                 );
     }

@@ -13,7 +13,7 @@ public interface ILoginContract {
     interface View extends IView {
         void onLoginSuccess(LoginBean loginBean);
 
-        void onLoginFail(@ErrCode int code);
+        void onLoginFail(@ErrCode int code, Throwable throwable);
     }
 
     interface Presenter extends IPresenter {
