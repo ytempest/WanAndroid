@@ -15,4 +15,6 @@ public interface HttpHelper {
     Observable<BaseResp<HomeArticleBean>> getHomeArticleList(int pageNum);
 
     Observable<BaseResp<LoginBean>> login(String account, String password);
+
+    Observable<BaseResp<LoginBean>> register(String account, String pwd, String confirmPwd);
 }

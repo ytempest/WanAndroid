@@ -32,4 +32,9 @@ public class HttpHelperImpl implements HttpHelper {
     public Observable<BaseResp<LoginBean>> login(String account, String password) {
         return mHttpApi.login(account, password);
     }
+
+    @Override
+    public Observable<BaseResp<LoginBean>> register(String account, String pwd, String confirmPwd) {
+        return mHttpApi.register(account, pwd, confirmPwd);
+    }
 }

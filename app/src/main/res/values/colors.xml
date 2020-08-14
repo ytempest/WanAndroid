@@ -18,4 +18,8 @@
     <color name="blue_button">@color/main_color</color>
     <color name="blue_button_press">#3397F6</color>
     <color name="blue_button_disable">#A5D3FF</color>
+
+    <color name="brown_button">#AA796C</color>
+    <color name="brown_button_press">#A17366</color>
+    <color name="brown_button_disable">#B19E99</color>
 </resources>

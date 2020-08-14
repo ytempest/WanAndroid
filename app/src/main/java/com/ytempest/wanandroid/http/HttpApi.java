@@ -28,8 +28,20 @@ public interface HttpApi {
     @GET("article/list/{pageNum}/json")
     Observable<BaseResp<HomeArticleBean>> getHomeArticleList(@Path("pageNum") int pageNum);
 
+    /**
+     * 用户登录
+     */
     @FormUrlEncoded
     @POST("user/login")
     Observable<BaseResp<LoginBean>> login(@Field("username") String account,
                                           @Field("password") String password);
+
+    /**
+     * 用户注册
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<BaseResp<LoginBean>> register(@Field("username") String account,
+                                             @Field("password") String pwd,
+                                             @Field("repassword") String confirmPwd);
 }

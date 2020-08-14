@@ -1,5 +1,6 @@
 package com.ytempest.wanandroid.activity.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.text.InputFilter;
@@ -8,6 +9,7 @@ import android.widget.EditText;
 
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.wanandroid.R;
+import com.ytempest.wanandroid.activity.register.RegisterActivity;
 import com.ytempest.wanandroid.base.activity.MvpActivity;
 import com.ytempest.wanandroid.http.ErrCode;
 import com.ytempest.wanandroid.http.bean.LoginBean;
@@ -64,7 +66,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements ILogin
 
     @OnClick(R.id.tv_login_register)
     void onRegisterClick() {
-        // TODO  heqidu: 注册操作
+        startActivity(new Intent(this, RegisterActivity.class));
     }
 
     @OnClick(R.id.bt_login_confirm)

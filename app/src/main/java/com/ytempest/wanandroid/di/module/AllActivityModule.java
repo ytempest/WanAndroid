@@ -2,6 +2,7 @@ package com.ytempest.wanandroid.di.module;
 
 import com.ytempest.wanandroid.activity.login.LoginActivity;
 import com.ytempest.wanandroid.activity.main.MainActivity;
+import com.ytempest.wanandroid.activity.register.RegisterActivity;
 import com.ytempest.wanandroid.base.activity.MvpActivity;
 import com.ytempest.wanandroid.di.component.BaseActivityComponent;
 
@@ -30,4 +31,7 @@ public abstract class AllActivityModule {
 
     @ContributesAndroidInjector(modules = ActivityModules.EmptyModule.class)
     abstract LoginActivity contributesLoginActivityInjector();
+
+    @ContributesAndroidInjector(modules = ActivityModules.EmptyModule.class)
+    abstract RegisterActivity contributesRegisterActivityInjector();
 }
