@@ -7,7 +7,7 @@ import com.ytempest.wanandroid.interactor.Configs;
 import com.ytempest.wanandroid.interactor.impl.BaseInteractor;
 import com.ytempest.wanandroid.interactor.impl.DbHelperImpl;
 import com.ytempest.wanandroid.interactor.impl.HttpHelperImpl;
-import com.ytempest.wanandroid.interactor.impl.ConfigsImpl;
+import com.ytempest.wanandroid.interactor.configs.ConfigsImpl;
 
 import javax.inject.Singleton;
 

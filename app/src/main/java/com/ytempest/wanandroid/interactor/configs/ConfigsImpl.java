@@ -1,4 +1,4 @@
-package com.ytempest.wanandroid.interactor.impl;
+package com.ytempest.wanandroid.interactor.configs;
 
 import com.ytempest.wanandroid.interactor.Configs;
 

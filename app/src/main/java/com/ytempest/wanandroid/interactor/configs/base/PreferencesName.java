@@ -1,4 +1,4 @@
-package com.ytempest.wanandroid.interactor.configs;
+package com.ytempest.wanandroid.interactor.configs.base;
 
 import android.support.annotation.StringDef;
 
@@ -10,9 +10,9 @@ import java.lang.annotation.RetentionPolicy;
  * @since 2020/8/15
  */
 @StringDef({
-
+        PreferencesName.USER,
 })
 @Retention(RetentionPolicy.SOURCE)
 public @interface PreferencesName {
-
+    String USER = "config_user";
 }

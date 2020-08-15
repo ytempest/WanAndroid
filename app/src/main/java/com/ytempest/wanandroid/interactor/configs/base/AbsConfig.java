@@ -1,4 +1,4 @@
-package com.ytempest.wanandroid.interactor.configs;
+package com.ytempest.wanandroid.interactor.configs.base;
 
 import android.content.Context;
 import android.content.SharedPreferences;
