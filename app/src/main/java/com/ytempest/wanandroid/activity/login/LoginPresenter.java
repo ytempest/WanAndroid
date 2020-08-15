@@ -3,6 +3,7 @@ package com.ytempest.wanandroid.activity.login;
 import com.ytempest.wanandroid.base.presenter.BasePresenter;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.observer.OptionalObserver;
+import com.ytempest.wanandroid.interactor.configs.UserConfig;
 import com.ytempest.wanandroid.interactor.impl.BaseInteractor;
 import com.ytempest.wanandroid.utils.RxUtils;
 
@@ -25,9 +26,14 @@ public class LoginPresenter extends BasePresenter<ILoginContract.View> implement
                 .compose(RxUtils.switchScheduler())
                 .subscribe(new OptionalObserver<LoginBean>()
                         .doOnStart(aVoid -> mView.showLoading())
-                        .doOnSuccess(loginBean -> mView.onLoginSuccess(loginBean))
-                        .doOnFail((code, throwable) -> mView.onLoginFail(code, throwable))
                         .doOnCompleted(aVoid -> mView.stopLoading())
+                        .doOnSuccess(loginBean -> {
+                            UserConfig config = mInteractor.getConfigs().getUser();
+                            config.setAccount(loginBean.getUsername());
+                            config.setUserLoginStatus(true);
+                            mView.onLoginSuccess(loginBean);
+                        })
+                        .doOnFail((code, throwable) -> mView.onLoginFail(code, throwable))
                 );
     }
 }
