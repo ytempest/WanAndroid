@@ -24,7 +24,7 @@ toolSdkPro=
 while getopts ":hp:" opt; do
     case ${opt} in
     h)
-
+        printHelp
         exit 0
         ;;
 
