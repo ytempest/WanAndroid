@@ -9,12 +9,12 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.ytempest.layoutinjector.annotation.InjectLayout;
+import com.ytempest.tool.util.RegexUtils;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.activity.MvpActivity;
 import com.ytempest.wanandroid.http.ErrCode;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.listener.TextWatcherListener;
-import com.ytempest.wanandroid.utils.RegexUtils;
 import com.ytempest.wanandroid.utils.SpaceInputFilter;
 import com.ytempest.wanandroid.utils.StatusBarUtil;
 import com.ytempest.wanandroid.widget.ModifiableButton;
