@@ -54,5 +54,5 @@ dependencies {
     annotationProcessorDeps.each { k, v -> annotationProcessor v }
 
     // tools
-    implementation(name: 'tool-v1.0-29-gfa6866c-2020-10-12_17-50', ext: 'aar')
+    implementation(name: 'tool-v1.0-31-g699409e-2020-11-18_17-45', ext: 'aar')
 }
