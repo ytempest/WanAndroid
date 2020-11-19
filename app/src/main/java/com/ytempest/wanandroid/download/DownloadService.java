@@ -38,12 +38,6 @@ public class DownloadService extends Service {
     private DownloadChannel mChannel;
 
     @Override
-    public void onCreate() {
-        super.onCreate();
-        mChannel = new DownloadChannel(this);
-    }
-
-    @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
         String url = intent.getStringExtra(KEY_DOWNLOAD_URL);
@@ -52,7 +46,10 @@ public class DownloadService extends Service {
             stopSelf();
             return START_STICKY;
         }
-        mChannel.setup(url, new File(savePath));
+        if (mChannel == null) {
+            mChannel = new DownloadChannel(this);
+        }
+        mChannel.update(url, new File(savePath));
         mChannel.startDownload();
 
         return START_STICKY;

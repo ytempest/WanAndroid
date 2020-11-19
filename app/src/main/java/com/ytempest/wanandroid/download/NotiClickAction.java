@@ -23,4 +23,12 @@ public @interface NotiClickAction {
     String ON_FAIL_CLICK = "action_on_fail_click";
     String ON_CONTINUE_CLICK = "action_on_continue_click";
     String ON_PAUSE_CLICK = "action_on_pause_click";
+
+    String[] ACTIONS = new String[]{
+            ON_PREPARE_CLICK,
+            ON_SUCCESS_CLICK,
+            ON_FAIL_CLICK,
+            ON_CONTINUE_CLICK,
+            ON_PAUSE_CLICK,
+    };
 }

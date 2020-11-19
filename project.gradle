@@ -63,6 +63,7 @@ buildscript {
             "retrofit-gson"         : "com.squareup.retrofit2:converter-gson:${depsVersions.retrofit}",
 
             "layout-injector"       : "com.ytempest:layoutinjector:${depsVersions.layout_injector}",
+            "greenrobot"            : "org.greenrobot:greendao:3.2.2",
     ]
 
     ext.annotationProcessorDeps = [

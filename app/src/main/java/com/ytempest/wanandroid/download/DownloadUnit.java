@@ -30,7 +30,6 @@ public class DownloadUnit {
         mOkHttpClient = okHttpClient;
     }
 
-
     public void setup(String url, File file) {
         mUrl = url;
         mSaveFile = file;
@@ -39,6 +38,14 @@ public class DownloadUnit {
     public DownloadUnit setDownloadListener(DownloadListener listener) {
         mListener = listener;
         return this;
+    }
+
+    public String getUrl() {
+        return mUrl;
+    }
+
+    public File getSaveFile() {
+        return mSaveFile;
     }
 
     public void startDownload(long start) {
@@ -50,7 +57,9 @@ public class DownloadUnit {
         mOkHttpClient.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(Call call, IOException e) {
-                mListener.onFail(e);
+                if (mListener != null) {
+                    mListener.onFail(e);
+                }
             }
 
             @Override
@@ -68,6 +77,7 @@ public class DownloadUnit {
                     accessFile = new RandomAccessFile(mSaveFile, "rw");
                     accessFile.seek(saveLen);
                     stream = body.byteStream();
+                    int lastProgress = 0;
                     int len;
                     byte[] buffer = new byte[2048];
                     while ((len = stream.read(buffer)) != -1) {
@@ -76,13 +86,17 @@ public class DownloadUnit {
                         }
                         accessFile.write(buffer, 0, len);
                         saveLen += len;
-                        float percent = 1F * saveLen / totalLen;
-                        if (mListener != null) {
-                            mListener.onProgress(percent, saveLen, totalLen);
+                        // 这里做个过滤，减少回调次数
+                        int progress = (int) (1F * saveLen / totalLen * 100);
+                        if (lastProgress != progress) {
+                            lastProgress = progress;
+                            if (mListener != null) {
+                                mListener.onProgress(saveLen, totalLen);
+                            }
                         }
                     }
                     if (mListener != null) {
-                        mListener.onSuccess();
+                        mListener.onSuccess(mSaveFile);
                     }
 
                 } catch (Exception e) {
@@ -104,9 +118,9 @@ public class DownloadUnit {
 
     public interface DownloadListener {
 
-        void onProgress(float percent, long saveLen, long totalLen);
+        void onProgress(long saveLen, long totalLen);
 
-        void onSuccess();
+        void onSuccess(File file);
 
         void onFail(Throwable throwable);
     }
