@@ -4,11 +4,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
-import android.widget.Toast;
 
 import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.base.presenter.IPresenter;
 import com.ytempest.wanandroid.base.view.IView;
+import com.ytempest.wanandroid.dialog.LoadingDialog;
 
 import javax.inject.Inject;
 
@@ -58,6 +58,24 @@ public abstract class MvpActivity<Presenter extends IPresenter> extends Abstract
     @Override
     public void showToast(@StringRes int textId) {
         ToastUtils.show(this, textId);
+    }
+
+    private LoadingDialog mLoadingDialog;
+
+    @Override
+    public void showLoading() {
+        if (mLoadingDialog == null) {
+            mLoadingDialog = new LoadingDialog(this);
+            mLoadingDialog.setAutoDismiss(getLifecycle());
+        }
+        mLoadingDialog.show();
+    }
+
+    @Override
+    public void stopLoading() {
+        if (mLoadingDialog != null) {
+            mLoadingDialog.dismiss();
+        }
     }
 
     // TODO  heqidu: 在Dagger2.20版本上会出现Cannot inject members into raw type com.ytempest.wanandroid.base.activity.MvpActivity

@@ -9,4 +9,26 @@
     <string name="get_data_fail">获取数据失败</string>
     <string name="request_fail">请求失败</string>
     <string name="unknown_err">未知错误</string>
+
+    <string name="login">登录</string>
+    <string name="login_account_hint">邮箱/手机号</string>
+    <string name="password">密码</string>
+    <string name="free_register">免费注册</string>
+    <string name="welcome_login_wanandroid">欢迎登录WanAndroid</string>
+    <string name="account_format_err">账号格式错误</string>
+    <string name="account_pwd_err">账号密码不匹配</string>
+    <string name="register">注册</string>
+    <string name="input_pwd">输入密码</string>
+    <string name="confirm_pwd">确认密码</string>
+    <string name="account_len_limit">账号长度必须大于%d位</string>
+    <string name="pwd_len_limit">密码长度必须大于%d位</string>
+    <string name="pwd_not_match">两次输入的密码不一致</string>
+    <string name="register_success">注册成功，快去登录吧</string>
+
+    <string name="continues">继续</string>
+    <string name="pause">暂停</string>
+    <string name="download_noti">下载通知</string>
+    <string name="download_fail">下载失败，请稍后重试</string>
+    <string name="download_success">下载成功，点击安装</string>
+
 </resources>

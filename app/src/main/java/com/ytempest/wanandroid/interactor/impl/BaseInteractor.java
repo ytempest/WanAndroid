@@ -3,7 +3,7 @@ package com.ytempest.wanandroid.interactor.impl;
 import com.ytempest.wanandroid.interactor.DbHelper;
 import com.ytempest.wanandroid.interactor.HttpHelper;
 import com.ytempest.wanandroid.interactor.MvpInteractor;
-import com.ytempest.wanandroid.interactor.PreferencesHelper;
+import com.ytempest.wanandroid.interactor.Configs;
 
 import javax.inject.Inject;
 
@@ -14,13 +14,13 @@ import javax.inject.Inject;
 public class BaseInteractor implements MvpInteractor {
     private final HttpHelper mHttpHelper;
     private final DbHelper mDbHelper;
-    private final PreferencesHelper mPreferencesHelper;
+    private final Configs mConfigs;
 
     @Inject
-    public BaseInteractor(HttpHelper httpHelper, DbHelper dbHelper, PreferencesHelper preferencesHelper) {
+    public BaseInteractor(HttpHelper httpHelper, DbHelper dbHelper, Configs configs) {
         mHttpHelper = httpHelper;
         mDbHelper = dbHelper;
-        mPreferencesHelper = preferencesHelper;
+        mConfigs = configs;
     }
 
     @Override
@@ -34,7 +34,7 @@ public class BaseInteractor implements MvpInteractor {
     }
 
     @Override
-    public PreferencesHelper getPreferencesHelper() {
-        return mPreferencesHelper;
+    public Configs getConfigs() {
+        return mConfigs;
     }
 }

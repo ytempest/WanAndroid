@@ -2,9 +2,13 @@ package com.ytempest.wanandroid.http;
 
 import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
+import com.ytempest.wanandroid.http.bean.LoginBean;
 
 import io.reactivex.Observable;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -24,4 +28,20 @@ public interface HttpApi {
     @GET("article/list/{pageNum}/json")
     Observable<BaseResp<HomeArticleBean>> getHomeArticleList(@Path("pageNum") int pageNum);
 
+    /**
+     * 用户登录
+     */
+    @FormUrlEncoded
+    @POST("user/login")
+    Observable<BaseResp<LoginBean>> login(@Field("username") String account,
+                                          @Field("password") String password);
+
+    /**
+     * 用户注册
+     */
+    @FormUrlEncoded
+    @POST("user/register")
+    Observable<BaseResp<LoginBean>> register(@Field("username") String account,
+                                             @Field("password") String pwd,
+                                             @Field("repassword") String confirmPwd);
 }

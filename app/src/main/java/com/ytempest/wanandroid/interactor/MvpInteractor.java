@@ -6,10 +6,10 @@ package com.ytempest.wanandroid.interactor;
  */
 public interface MvpInteractor {
 
-    public HttpHelper getHttpHelper();
+    HttpHelper getHttpHelper();
 
-    public DbHelper getDbHelper();
+    DbHelper getDbHelper();
 
-    public PreferencesHelper getPreferencesHelper();
+    Configs getConfigs();
 
 }

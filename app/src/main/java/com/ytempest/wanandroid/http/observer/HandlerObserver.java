@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.view.IView;
+import com.ytempest.wanandroid.http.ErrCode;
 
 /**
  * @author heqidu
@@ -38,7 +39,7 @@ public abstract class HandlerObserver<T> extends BaseObserver<T> {
     }
 
     @Override
-    protected void onFail(@Error int reason, Throwable e) {
+    protected void onFail(@ErrCode int code, Throwable e) {
         if (mView == null) return;
 
         if (mErrMsgId != null) {
@@ -52,17 +53,17 @@ public abstract class HandlerObserver<T> extends BaseObserver<T> {
         }
 
         if (showErrMsg) {
-            switch (reason) {
-                case Error.NET_ERR:
+            switch (code) {
+                case ErrCode.NET_ERR:
                     mView.showToast(R.string.net_err);
                     break;
-                case Error.DATA_ERR:
+                case ErrCode.EMPTY_RESP:
                     mView.showToast(R.string.get_data_fail);
                     break;
-                case Error.REQUEST_ERR:
+                case ErrCode.DATA_ERR:
                     mView.showToast(R.string.request_fail);
                     break;
-                case Error.UNKNOWN_ERR:
+                case ErrCode.UNKNOWN_ERR:
                     mView.showToast(R.string.unknown_err);
                     break;
             }

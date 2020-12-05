@@ -2,8 +2,8 @@ package com.ytempest.wanandroid.di.module.http;
 
 import android.text.TextUtils;
 
+import com.ytempest.tool.util.NetUtils;
 import com.ytempest.wanandroid.base.WanApp;
-import com.ytempest.wanandroid.utils.NetUtils;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
