@@ -16,7 +16,9 @@ buildscript {
             "retrofit"       : "2.4.0",
             "rxjava"         : "2.0.2",
             "okhttp"         : "3.9.0",
-            "layout_injector": "1.0"
+            "layout_injector": "1.0",
+            "banner"         : "1.0",
+            "glide"          : "4.5.0",
     ]
 
     ext.testImplementationDeps = [
@@ -64,6 +66,8 @@ buildscript {
 
             "layout-injector"       : "com.ytempest:layoutinjector:${depsVersions.layout_injector}",
             "greenrobot"            : "org.greenrobot:greendao:3.2.2",
+            "glide"                 : "com.github.bumptech.glide:glide:${depsVersions.glide}",
+            "banner"                : "com.ytempest:banner:${depsVersions.banner}",
     ]
 
     ext.annotationProcessorDeps = [
@@ -75,5 +79,6 @@ buildscript {
             "dagger-processor"    : "com.google.dagger:dagger-android-processor:${depsVersions.dagger}",
 
             "layout-injector"     : "com.ytempest:layoutinjector-compiler:${depsVersions.layout_injector}",
+            "glide"               : "com.github.bumptech.glide:compiler:${depsVersions.glide}",
     ]
 }

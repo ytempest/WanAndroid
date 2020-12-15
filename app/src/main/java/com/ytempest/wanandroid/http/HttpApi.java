@@ -1,8 +1,11 @@
 package com.ytempest.wanandroid.http;
 
+import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -44,4 +47,11 @@ public interface HttpApi {
     Observable<BaseResp<LoginBean>> register(@Field("username") String account,
                                              @Field("password") String pwd,
                                              @Field("repassword") String confirmPwd);
+
+    /**
+     * 首页Banner
+     */
+    @GET("banner/json")
+    Observable<BaseResp<List<BannerBean>>> getBannerList();
+
 }

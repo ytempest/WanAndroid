@@ -4,12 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/common_bg"
-    android:gravity="center"
+    android:orientation="vertical"
     tools:context=".activity.main.MainActivity">
 
-    <TextView
-        android:id="@+id/textView_homeFrag"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/tab_home" />
+    <com.ytempest.banner.Banner
+        android:id="@+id/view_banner_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp" />
 </LinearLayout>
