@@ -1,5 +1,8 @@
 package com.ytempest.wanandroid.di.module.http;
 
+import com.franmontiel.persistentcookiejar.PersistentCookieJar;
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache;
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor;
 import com.ytempest.wanandroid.BuildConfig;
 import com.ytempest.wanandroid.base.WanApp;
 import com.ytempest.wanandroid.di.module.http.event.NetEventListener;
@@ -58,6 +61,9 @@ public class OkHttpManager {
 
         //错误重连
         builder.retryOnConnectionFailure(true);
+        //cookie认证
+        builder.cookieJar(new PersistentCookieJar(new SetCookieCache(),
+                new SharedPrefsCookiePersistor(WanApp.getApp())));
         mClient = builder.build();
     }
 

@@ -28,3 +28,11 @@ public static java.lang.String TABLENAME;
 -keep class org.greenrobot.greendao.database.SqlCipherEncryptedHelper { *; }
 -dontwarn net.sqlcipher.database.**
 -dontwarn rx.**
+
+################ 数据类 ################
+# 使用Gson时需要配置Gson的解析对象及变量都不混淆。不然Gson会找不到变量。
+-keep class com.ytempest.wanandroid.http.bean.** { *; }
+
+################ cookie认证 ################
+-dontwarn com.franmontiel.persistentcookiejar.**
+-keep class com.franmontiel.persistentcookiejar.**

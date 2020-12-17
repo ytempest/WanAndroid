@@ -83,7 +83,7 @@ public class LoginActivity extends MvpActivity<LoginPresenter> implements ILogin
 
     @Override
     public void onLoginSuccess(LoginBean loginBean) {
-        // TODO  heqidu: 登录成功后的操作
+        finish();
     }
 
     @Override
