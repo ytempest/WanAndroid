@@ -1,5 +1,6 @@
 package com.ytempest.wanandroid.http;
 
+import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
@@ -54,4 +55,21 @@ public interface HttpApi {
     @GET("banner/json")
     Observable<BaseResp<List<BannerBean>>> getBannerList();
 
+    /**
+     * 收藏站内文章
+     */
+    @POST("lg/collect/{id}/json")
+    Observable<BaseResp<ArticleCollectBean>> addCollectArticle(@Path("id") long articleId);
+
+    /**
+     * 取消文章列表的收藏
+     */
+    @POST("lg/uncollect_originId/{id}/json")
+    Observable<BaseResp<ArticleCollectBean>> cancelCollectArticle(@Path("id") long articleId);
+
+    /**
+     * 取消我的收藏页面的收藏文章
+     */
+    @POST("lg/uncollect/{id}/json")
+    Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(@Path("id") long articleId);
 }

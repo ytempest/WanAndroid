@@ -1,6 +1,7 @@
 package com.ytempest.wanandroid.interactor.impl;
 
 import com.ytempest.wanandroid.http.HttpApi;
+import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
@@ -44,5 +45,20 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResp<List<BannerBean>>> getBannerList() {
         return mHttpApi.getBannerList();
+    }
+
+    @Override
+    public Observable<BaseResp<ArticleCollectBean>> addCollectArticle(long articleId) {
+        return mHttpApi.addCollectArticle(articleId);
+    }
+
+    @Override
+    public Observable<BaseResp<ArticleCollectBean>> cancelCollectArticle(long articleId) {
+        return mHttpApi.cancelCollectArticle(articleId);
+    }
+
+    @Override
+    public Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(long articleId) {
+        return mHttpApi.cancelMyCollectArticle(articleId);
     }
 }

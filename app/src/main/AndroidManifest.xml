@@ -22,6 +22,7 @@
         </activity>
         <activity android:name=".activity.login.LoginActivity" />
         <activity android:name=".activity.register.RegisterActivity" />
+        <activity android:name=".activity.article.ArticleDetailActivity" />
 
         <service android:name=".download.DownloadService" />
     </application>

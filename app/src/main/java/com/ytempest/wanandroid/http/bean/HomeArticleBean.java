@@ -119,7 +119,7 @@ public class HomeArticleBean {
         private String descMd;
         private String envelopePic;
         private boolean fresh;
-        private int id;
+        private long id;
         private String link;
         private String niceDate;
         private String niceShareDate;
@@ -236,11 +236,11 @@ public class HomeArticleBean {
             this.fresh = fresh;
         }
 
-        public int getId() {
+        public long getId() {
             return id;
         }
 
-        public void setId(int id) {
+        public void setId(long id) {
             this.id = id;
         }
 

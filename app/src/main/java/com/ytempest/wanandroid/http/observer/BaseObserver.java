@@ -29,11 +29,16 @@ public abstract class BaseObserver<T> extends DefaultObserver<BaseResp<T>> {
             return;
         }
 
-        if (resp.getData() == null) {
+        T data = onHookData(resp.getData());
+        if (data == null) {
             onFail(ErrCode.DATA_ERR, new DataErrException(resp.getErrorMsg()));
             return;
         }
-        onSuccess(resp.getData());
+        onSuccess(data);
+    }
+
+    protected T onHookData(T data) {
+        return data;
     }
 
     @Override
