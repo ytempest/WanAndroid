@@ -43,13 +43,8 @@ public class ArticleDetailPresenter extends BasePresenter<IArticleDetailContract
 
         mView.showLoading();
         collectObservable.compose(RxUtils.switchScheduler())
+                .map(RxUtils.checkArticleCollectData())
                 .subscribe(new HandlerObserver<ArticleCollectBean>(mView) {
-                    @Override
-                    protected ArticleCollectBean onHookData(ArticleCollectBean data) {
-                        // 收藏请求返回的对象为null，则这里处理，防止BaseObserver判断为请求异常
-                        return data != null ? data : new ArticleCollectBean();
-                    }
-
                     @Override
                     protected void onSuccess(@NonNull ArticleCollectBean bean) {
                         mView.stopLoading();
