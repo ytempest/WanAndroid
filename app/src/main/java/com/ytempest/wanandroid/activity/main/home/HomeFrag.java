@@ -3,12 +3,17 @@ package com.ytempest.wanandroid.activity.main.home;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.ytempest.banner.Banner;
 import com.ytempest.banner.transformers.Transformers;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.wanandroid.R;
+import com.ytempest.wanandroid.activity.main.home.article.HomeArticleAdapter;
 import com.ytempest.wanandroid.base.fragment.MvpFragment;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
@@ -24,17 +29,63 @@ import butterknife.BindView;
 @InjectLayout(R.layout.frag_home)
 public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContract.View {
 
-    @BindView(R.id.view_banner_view)
+    private static final String TAG = HomeFrag.class.getSimpleName();
+
+    @BindView(R.id.view_main_pull_refresh)
+    SwipeRefreshLayout mRefreshLayout;
+    @BindView(R.id.view_main_nested_scroll)
+    NestedScrollView mNestedScrollView;
+    @BindView(R.id.view_main_banner)
     Banner mBannerView;
+    @BindView(R.id.rv_main_article_list)
+    RecyclerView mRecyclerView;
+    private HomeArticleAdapter mAdapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView();
+        initData();
+    }
+
+    private void initView() {
+        mRefreshLayout.setColorSchemeResources(R.color.main_color);
+        mRefreshLayout.setOnRefreshListener(() -> mPresenter.refreshHomeArticle());
+
         mBannerView.setBannerBinder(new HomeBannerBinder());
         mBannerView.setPlayDuration(3000);
         mBannerView.setScrollDuration(1500);
         mBannerView.setScrollAnimation(Transformers.DAMPING);
+
+        // 移除RecyclerView更新数据时的动画，防止View闪烁的问题
+        mRecyclerView.setItemAnimator(null);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mAdapter = new HomeArticleAdapter(mPresenter);
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setNestedScrollingEnabled(true);
+        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (isArriveBottom()) {
+                    mPresenter.loadMoreHomeArticle();
+                }
+            }
+        });
+    }
+
+    private boolean isArriveBottom() {
+        // RecyclerView.canScrollVertically(1)的值表示是否能向上滚动，false表示已经滚动到底部
+        // RecyclerView.canScrollVertically(-1)的值表示是否能向下滚动，false表示已经滚动到顶部
+        // 由于NestedScrollView嵌套了RecyclerView，这里需要通过NestedScrollView判断
+        boolean isArriveBottom = !mNestedScrollView.canScrollVertically(1);
+        boolean isIdleState = mRecyclerView.getScrollState() == RecyclerView.SCROLL_STATE_IDLE;
+        return isArriveBottom && isIdleState;
+    }
+
+    private void initData() {
         mPresenter.getBannerList();
+        mPresenter.refreshHomeArticle();
     }
 
     @Override
@@ -43,8 +94,13 @@ public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContrac
     }
 
     @Override
-    public void displayHomeArticle(HomeArticleBean homeArticleBean) {
-
+    public void displayHomeArticle(boolean fromRefresh, HomeArticleBean homeArticleBean) {
+        if (fromRefresh) {
+            mRefreshLayout.setRefreshing(false);
+            mAdapter.display(homeArticleBean.getDatas());
+        } else {
+            mAdapter.addData(homeArticleBean.getDatas());
+        }
     }
 
     @Override
@@ -67,5 +123,15 @@ public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContrac
     public void onPause() {
         super.onPause();
         mBannerView.stopAutoPlay();
+    }
+
+    @Override
+    public void onArticleCollectSuccess(HomeArticleBean.DatasBean data) {
+        mAdapter.refresh(data);
+    }
+
+    @Override
+    public void onArticleCollectFail(HomeArticleBean.DatasBean data, int code) {
+
     }
 }

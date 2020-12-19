@@ -13,12 +13,22 @@ import java.util.List;
  */
 public interface IHomeContract {
     interface View extends IView {
-        void displayHomeArticle(HomeArticleBean homeArticleBean);
+        void displayHomeArticle(boolean fromRefresh, HomeArticleBean homeArticleBean);
 
         void showBanner(List<BannerBean> data);
+
+        void onArticleCollectSuccess(HomeArticleBean.DatasBean data);
+
+        void onArticleCollectFail(HomeArticleBean.DatasBean data, int code);
     }
 
     interface Presenter extends IPresenter {
-        void loadHomeArticle();
+        boolean isUserLogin();
+
+        void refreshHomeArticle();
+
+        void loadMoreHomeArticle();
+
+        void updateArticleCollectStatus(HomeArticleBean.DatasBean data);
     }
 }

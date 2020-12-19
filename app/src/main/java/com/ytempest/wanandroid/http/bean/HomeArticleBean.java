@@ -395,5 +395,20 @@ public class HomeArticleBean {
         public void setTags(List<?> tags) {
             this.tags = tags;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            DatasBean datasBean = (DatasBean) o;
+
+            return id == datasBean.id;
+        }
+
+        @Override
+        public int hashCode() {
+            return (int) (id ^ (id >>> 32));
+        }
     }
 }
