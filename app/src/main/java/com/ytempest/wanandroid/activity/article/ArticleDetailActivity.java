@@ -20,6 +20,7 @@ import com.ytempest.wanandroid.base.activity.MvpActivity;
 import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.utils.JSON;
 import com.ytempest.wanandroid.utils.StatusBarUtil;
+import com.ytempest.wanandroid.utils.Utils;
 
 import butterknife.BindView;
 
@@ -65,6 +66,7 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_article_detail, menu);
         refreshCollectArticleView(mArticleDetail.isCollected());
+        Utils.enableMenuShowIcon(menu);
         return super.onCreateOptionsMenu(menu);
     }
 

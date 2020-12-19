@@ -6,16 +6,19 @@
         android:id="@+id/item_article_detail_collect"
         android:icon="@drawable/sl_article_collect_status"
         android:title="@string/collect"
+        android:orderInCategory="100"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/item_article_detail_share"
+        android:icon="@drawable/ic_share"
         android:orderInCategory="100"
         android:title="@string/share"
         app:showAsAction="never" />
 
     <item
         android:id="@+id/item_article_detail_browser"
+        android:icon="@drawable/ic_browser"
         android:orderInCategory="100"
         android:title="@string/open_it_with_browser"
         app:showAsAction="never" />
