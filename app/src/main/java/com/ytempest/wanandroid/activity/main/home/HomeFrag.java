@@ -15,6 +15,7 @@ import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.activity.main.home.article.HomeArticleAdapter;
 import com.ytempest.wanandroid.base.fragment.MvpFragment;
+import com.ytempest.wanandroid.helper.ArticleDetailHelper;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 
@@ -86,6 +87,16 @@ public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContrac
     private void initData() {
         mPresenter.getBannerList();
         mPresenter.refreshHomeArticle();
+        ArticleDetailHelper.getInstance().getArticleUpdateDetail().observe(getViewLifecycleOwner(), bean -> {
+            if (bean == null) return;
+            for (HomeArticleBean.DatasBean data : mAdapter.getSrcDataList()) {
+                if (data.getId() == bean.getArticleId()) {
+                    data.setCollect(bean.isCollected());
+                    mAdapter.refresh(data);
+                    return;
+                }
+            }
+        });
     }
 
     @Override

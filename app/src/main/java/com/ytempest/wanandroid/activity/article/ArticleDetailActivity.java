@@ -24,6 +24,7 @@ import com.ytempest.tool.util.web.WebViewClientWrapper;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.activity.login.LoginActivity;
 import com.ytempest.wanandroid.base.activity.MvpActivity;
+import com.ytempest.wanandroid.helper.ArticleDetailHelper;
 import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.utils.JSON;
 import com.ytempest.wanandroid.utils.StatusBarUtil;
@@ -158,9 +159,11 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
     }
 
     private void refreshCollectArticleView(boolean isCollect) {
+        mArticleDetail.setCollected(isCollect);
         MenuItem item = mToolbar.getMenu().findItem(R.id.item_article_detail_collect);
         item.setIcon(isCollect ? R.drawable.ic_collect_select : R.drawable.ic_collect_normal);
         item.setChecked(isCollect);
+        ArticleDetailHelper.getInstance().postUpdate(mArticleDetail);
     }
 
     @Override
