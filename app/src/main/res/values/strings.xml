@@ -37,5 +37,7 @@
     <string name="cancel_fail">取消失败，重试一下吧~</string>
     <string name="anonymous_develop">匿名开发</string>
     <string name="login_please">请先登录~</string>
+    <string name="refresh">刷新</string>
+    <string name="share_from">来自%s的分享：%s</string>
 
 </resources>

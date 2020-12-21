@@ -14,9 +14,20 @@
         app:popupTheme="@style/Toolbar.PopupTheme"
         app:titleTextAppearance="@style/Toolbar.TitleText" />
 
-    <WebView
-        android:id="@+id/webView_article_detail_content"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
 
+        <WebView
+            android:id="@+id/webView_article_detail_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ProgressBar
+            android:id="@+id/view_article_detail_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:progressDrawable="@drawable/ll_article_detail_progress" />
+    </FrameLayout>
 </LinearLayout>

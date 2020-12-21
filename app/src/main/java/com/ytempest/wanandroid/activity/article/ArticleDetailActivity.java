@@ -2,18 +2,25 @@ package com.ytempest.wanandroid.activity.article;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.widget.ProgressBar;
 
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.tool.helper.ActivityLauncher;
 import com.ytempest.tool.util.IntentUtils;
 import com.ytempest.tool.util.LogUtils;
+import com.ytempest.tool.util.NetUtils;
+import com.ytempest.tool.util.web.WebUtils;
+import com.ytempest.tool.util.web.WebViewClientWrapper;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.activity.login.LoginActivity;
 import com.ytempest.wanandroid.base.activity.MvpActivity;
@@ -33,6 +40,7 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
 
     private static final String TAG = ArticleDetailActivity.class.getSimpleName();
     private static final String KEY_ARTICLE_DETAIL = "key_article_detail";
+    private static final int MAX_PROGRESS = 100;
 
     public static void start(Context context, ArticleDetailBean bean) {
         Intent intent = new Intent(context, ArticleDetailActivity.class);
@@ -42,6 +50,8 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
 
     @BindView(R.id.toolbar_article_detail)
     Toolbar mToolbar;
+    @BindView(R.id.view_article_detail_progress)
+    ProgressBar mProgressBar;
     @BindView(R.id.webView_article_detail_content)
     WebView mWebView;
     private ArticleDetailBean mArticleDetail;
@@ -58,8 +68,40 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
         // 标题要在setSupportActionBar()前设置
         mToolbar.setTitle(mArticleDetail.getTitle());
         setSupportActionBar(mToolbar);
-
         mToolbar.setNavigationOnClickListener(v -> finish());
+
+        mProgressBar.setMax(MAX_PROGRESS);
+        WebUtils.initWebView(this, mWebView);
+        mWebView.setWebViewClient(new WebViewClientWrapper() {
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                mProgressBar.setVisibility(View.INVISIBLE);
+            }
+        });
+        mWebView.setWebChromeClient(new WebChromeClient() {
+            @Override
+            public void onProgressChanged(WebView view, int progress) {
+                super.onProgressChanged(view, progress);
+                mProgressBar.setProgress(progress);
+            }
+        });
+
+        loadArticle(false);
+    }
+
+    private void loadArticle(boolean forceRefresh) {
+        if (!NetUtils.isNetAvailable(this)) {
+            showToast(R.string.net_err);
+            return;
+        }
+        mProgressBar.setProgress(0);
+        mProgressBar.setVisibility(View.VISIBLE);
+        if (!forceRefresh) {
+            mWebView.loadUrl(mArticleDetail.getUrl());
+        } else {
+            mWebView.reload();
+        }
     }
 
     @Override
@@ -76,12 +118,24 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
             case R.id.item_article_detail_collect:
                 onArticleCollectClick(item);
                 break;
+
+            case R.id.item_article_detail_refresh:
+                loadArticle(true);
+                break;
+
             case R.id.item_article_detail_share:
-                // TODO  heqidu: 分享文章
+                String articleUrl = mArticleDetail.getUrl();
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_TEXT, getString(R.string.share_from, getString(R.string.app_name), articleUrl));
+                intent.setType("text/plain");
+                startActivity(intent);
                 break;
+
             case R.id.item_article_detail_browser:
-                // TODO  heqidu: 在浏览器打开
+                Uri url = Uri.parse(mArticleDetail.getUrl());
+                ActivityLauncher.startActivity(this, new Intent(Intent.ACTION_VIEW, url));
                 break;
+
             default:
                 break;
         }
@@ -112,5 +166,12 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
     @Override
     public void onArticleCollectFail(boolean isCollect, long articleId, int errCode) {
         showToast(isCollect ? R.string.collect_fail : R.string.cancel_fail);
+    }
+
+    @Override
+    protected void onDestroy() {
+        mWebView.stopLoading();
+        mWebView.destroy();
+        super.onDestroy();
     }
 }
