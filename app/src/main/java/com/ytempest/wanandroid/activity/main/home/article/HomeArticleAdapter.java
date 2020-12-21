@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.ytempest.tool.adapter.CoreRecyclerAdapter;
 import com.ytempest.tool.adapter.CoreViewHolder;
@@ -62,18 +61,12 @@ public class HomeArticleAdapter extends CoreRecyclerAdapter<HomeArticleBean.Data
     @Override
     protected void onBindData(CoreViewHolder holder, HomeArticleBean.DatasBean data, int position) {
         holder.setTag(data);
-        // TODO  heqidu: 优化 holder
-        TextView userView = holder.getViewById(R.id.tv_item_home_article_user);
         String user = data.getShareUser();
-        user = TextUtils.isEmpty(user) ? userView.getResources().getString(R.string.anonymous_develop) : user;
-        userView.setText(user);
-        TextView classifyView = holder.getViewById(R.id.tv_item_home_article_classify);
-        classifyView.setText(data.getSuperChapterName() + "/" + data.getChapterName());
-        TextView contentView = holder.getViewById(R.id.tv_item_home_article_content);
-        contentView.setText(data.getTitle());
-
-        TextView timeView = holder.getViewById(R.id.tv_item_home_article_time);
-        timeView.setText(DateFormat.format(data.getShareDate()));
+        user = TextUtils.isEmpty(user) ? holder.itemView.getResources().getString(R.string.anonymous_develop) : user;
+        holder.setText(R.id.tv_item_home_article_user, user);
+        holder.setText(R.id.tv_item_home_article_classify, data.getSuperChapterName() + "/" + data.getChapterName());
+        holder.setText(R.id.tv_item_home_article_content, data.getTitle());
+        holder.setText(R.id.tv_item_home_article_time, DateFormat.format(data.getShareDate()));
 
         ImageView collectView = holder.getViewById(R.id.iv_item_home_article_collect);
         collectView.setImageResource(data.isCollect() ? R.drawable.ic_collect_select : R.drawable.ic_collect_normal_gray);

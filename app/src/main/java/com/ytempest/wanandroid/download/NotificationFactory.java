@@ -46,14 +46,14 @@ public class NotificationFactory {
                     .setDefaults(Notification.DEFAULT_LIGHTS | Notification.DEFAULT_SOUND)
                     .setWhen(System.currentTimeMillis());
 
-            if (SdkUtils.isOverO()) {
+            if (SdkUtils.OVER_O) {
                 NotificationChannel channel = new NotificationChannel(CHANNEL, tip, NotificationManager.IMPORTANCE_DEFAULT);
                 mManager.createNotificationChannel(channel);
                 mBuilder.setChannelId(CHANNEL);
             }
         }
 
-        if (SdkUtils.isOverN()) {
+        if (SdkUtils.OVER_N) {
             mBuilder.setCustomContentView(remoteViews);
         } else {
             mBuilder.setContent(remoteViews);

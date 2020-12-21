@@ -61,7 +61,7 @@ public class NotificationHelper {
 
     @SuppressLint("NewApi")
     public void showSimpleNoti(int id, String channelId, String channelName, Notification.Builder builder) {
-        if (SdkUtils.isOverO()) {
+        if (SdkUtils.OVER_O) {
             NotificationChannel channel = new NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT);
             Notification notification = builder.setChannelId(channelId).build();
             mManager.createNotificationChannel(channel);
