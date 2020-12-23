@@ -1,5 +1,6 @@
 package com.ytempest.wanandroid.base.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -31,6 +32,14 @@ public abstract class AbstractActivity extends AppCompatActivity {
         if (mBind != null) {
             mBind.unbind();
         }
+    }
+
+    public Context getContext() {
+        return this;
+    }
+
+    public AppCompatActivity getActivity() {
+        return this;
     }
 
     protected abstract void onViewCreated();

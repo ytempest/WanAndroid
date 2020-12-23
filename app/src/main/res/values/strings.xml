@@ -39,5 +39,8 @@
     <string name="login_please">请先登录~</string>
     <string name="refresh">刷新</string>
     <string name="share_from">来自%s的分享：%s</string>
+    <string name="setting_net">设置网络</string>
+    <string name="retry_again">重试一下</string>
+    <string name="net_sneak_off">网络开小差了~</string>
 
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
@@ -14,20 +15,29 @@
         app:popupTheme="@style/Toolbar.PopupTheme"
         app:titleTextAppearance="@style/Toolbar.TitleText" />
 
-    <FrameLayout
+
+    <com.ytempest.wanandroid.widget.MaskLayout
+        android:id="@+id/view_article_detail_mask"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar_article_detail"
+        app:mask_layout="@layout/layout_net_error">
 
         <WebView
             android:id="@+id/webView_article_detail_content"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:overScrollMode="never" />
 
-        <ProgressBar
-            android:id="@+id/view_article_detail_progress"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="3dp"
-            android:progressDrawable="@drawable/ll_article_detail_progress" />
-    </FrameLayout>
-</LinearLayout>
+    </com.ytempest.wanandroid.widget.MaskLayout>
+
+    <ProgressBar
+        android:id="@+id/view_article_detail_progress"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_below="@id/toolbar_article_detail"
+        android:progressDrawable="@drawable/ll_article_detail_progress"
+        android:visibility="invisible"
+        tools:visibility="visible" />
+</RelativeLayout>

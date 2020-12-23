@@ -2,8 +2,10 @@ package com.ytempest.wanandroid.activity.article;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.Toolbar;
@@ -11,6 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebChromeClient;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.widget.ProgressBar;
 
@@ -29,6 +33,7 @@ import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.utils.JSON;
 import com.ytempest.wanandroid.utils.StatusBarUtil;
 import com.ytempest.wanandroid.utils.Utils;
+import com.ytempest.wanandroid.widget.MaskLayout;
 
 import butterknife.BindView;
 
@@ -51,6 +56,8 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
 
     @BindView(R.id.toolbar_article_detail)
     Toolbar mToolbar;
+    @BindView(R.id.view_article_detail_mask)
+    MaskLayout mMaskLayout;
     @BindView(R.id.view_article_detail_progress)
     ProgressBar mProgressBar;
     @BindView(R.id.webView_article_detail_content)
@@ -71,13 +78,40 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
         setSupportActionBar(mToolbar);
         mToolbar.setNavigationOnClickListener(v -> finish());
 
+        mProgressBar.setVisibility(View.INVISIBLE);
         mProgressBar.setMax(MAX_PROGRESS);
         WebUtils.initWebView(this, mWebView);
         mWebView.setWebViewClient(new WebViewClientWrapper() {
+            // TODO  heqidu: 待优化
+            private boolean isLoadErr;
+
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                isLoadErr = false;
+            }
+
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 mProgressBar.setVisibility(View.INVISIBLE);
+                if (isLoadErr) {
+                    mMaskLayout.showMask();
+                } else {
+                    mMaskLayout.hideMask();
+                }
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                isLoadErr = true;
+            }
+
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                isLoadErr = true;
             }
         });
         mWebView.setWebChromeClient(new WebChromeClient() {
@@ -88,20 +122,31 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
             }
         });
 
+        mMaskLayout.setMaskActionListener(new MaskLayout.SimpleMaskActionListener() {
+            @Override
+            public void onMaskCreated(View maskView) {
+                super.onMaskCreated(maskView);
+                maskView.findViewById(R.id.tv_net_error_retry)
+                        .setOnClickListener(v -> loadArticle(true));
+                maskView.findViewById(R.id.tv_net_error_setting_net)
+                        .setOnClickListener(v -> startActivity(new Intent(Settings.ACTION_SETTINGS)));
+            }
+        });
+
         loadArticle(false);
     }
 
     private void loadArticle(boolean forceRefresh) {
-        if (!NetUtils.isNetAvailable(this)) {
-            showToast(R.string.net_err);
+        if (mProgressBar.getVisibility() == View.VISIBLE) {
+            LogUtils.d(TAG, "loadArticle: 正在加载");
             return;
         }
         mProgressBar.setProgress(0);
         mProgressBar.setVisibility(View.VISIBLE);
-        if (!forceRefresh) {
-            mWebView.loadUrl(mArticleDetail.getUrl());
-        } else {
+        if (forceRefresh) {
             mWebView.reload();
+        } else {
+            mWebView.loadUrl(mArticleDetail.getUrl());
         }
     }
 
@@ -121,7 +166,11 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
                 break;
 
             case R.id.item_article_detail_refresh:
-                loadArticle(true);
+                if (NetUtils.isNetAvailable(getContext())) {
+                    loadArticle(true);
+                } else {
+                    showToast(R.string.net_err);
+                }
                 break;
 
             case R.id.item_article_detail_share:
