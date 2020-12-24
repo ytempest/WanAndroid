@@ -54,6 +54,8 @@ public class MaskLayout extends FrameLayout {
     private void initMaskView() {
         if (mMaskView == null) {
             mMaskView = LayoutInflater.from(getContext()).inflate(mMaskLayoutId, this, false);
+            // 覆盖底层View的点击和滚动
+            mMaskView.setClickable(true);
             mListener.onMaskCreated(mMaskView);
 
             addView(mMaskView);

@@ -15,15 +15,20 @@ public interface IHomeContract {
     interface View extends IView {
         void displayHomeArticle(boolean fromRefresh, HomeArticleBean homeArticleBean);
 
-        void showBanner(List<BannerBean> data);
-
         void onArticleCollectSuccess(HomeArticleBean.DatasBean data);
 
         void onArticleCollectFail(HomeArticleBean.DatasBean data, int code);
+
+        void onHomeDataSuccess(List<BannerBean> bannerList, HomeArticleBean bean);
+
+        void onHomeDataFail(int code);
+
     }
 
     interface Presenter extends IPresenter {
         boolean isUserLogin();
+
+        void loadHomeData();
 
         void refreshHomeArticle();
 

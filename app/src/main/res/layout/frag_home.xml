@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/view_main_pull_refresh"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/common_bg">
+    android:layout_height="match_parent">
 
-    <android.support.v4.widget.NestedScrollView
-        android:id="@+id/view_main_nested_scroll"
+    <com.ytempest.wanandroid.widget.MaskLayout
+        android:id="@+id/layout_main_mask"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:mask_layout="@layout/layout_net_error">
 
-        <LinearLayout
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/view_main_pull_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:background="@color/common_bg">
 
-            <com.ytempest.banner.Banner
-                android:id="@+id/view_main_banner"
-                android:layout_width="match_parent"
-                android:layout_height="200dp" />
+            <include layout="@layout/frag_home_content" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rv_main_article_list"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="10dp" />
-        </LinearLayout>
+        </android.support.v4.widget.SwipeRefreshLayout>
+    </com.ytempest.wanandroid.widget.MaskLayout>
 
-    </android.support.v4.widget.NestedScrollView>
-
-</android.support.v4.widget.SwipeRefreshLayout>
+    <com.ytempest.wanandroid.widget.MainLoadView
+        android:id="@+id/view_main_load_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</FrameLayout>
