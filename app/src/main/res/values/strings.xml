@@ -42,5 +42,7 @@
     <string name="setting_net">设置网络</string>
     <string name="retry_again">重试一下</string>
     <string name="net_sneak_off">网络开小差了~</string>
+    <string name="arrived_end">已经到达尽头了~</string>
+    <string name="project_url">项目地址</string>
 
 </resources>

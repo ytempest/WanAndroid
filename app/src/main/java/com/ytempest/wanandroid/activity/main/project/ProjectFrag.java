@@ -38,6 +38,7 @@ public class ProjectFrag extends MvpFragment<ProjectPresenter> implements IProje
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        mViewPager.setOffscreenPageLimit(3);
         mAdapter = new ProjectContentAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
 

@@ -6,6 +6,7 @@ import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
+import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * @author heqidu
@@ -78,4 +80,9 @@ public interface HttpApi {
 
     @GET("project/tree/json")
     Observable<BaseResp<List<ProjectClassifyBean>>> getProjectClassify();
+
+    @GET("project/list/{page}/json")
+    Observable<BaseResp<ProjectContentBean>> getProjectContent(@Path("page") int page,
+                                                               @Query("cid") int cid);
+
 }

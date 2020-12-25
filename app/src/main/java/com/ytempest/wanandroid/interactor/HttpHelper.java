@@ -6,6 +6,7 @@ import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
+import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 
 import java.util.List;
 
@@ -32,5 +33,7 @@ public interface HttpHelper {
     Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(long articleId);
 
     Observable<BaseResp<List<ProjectClassifyBean>>> getProjectClassify();
+
+    Observable<BaseResp<ProjectContentBean>> getProjectContent(int page, int cid);
 
 }
