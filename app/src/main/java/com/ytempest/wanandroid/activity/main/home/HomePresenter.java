@@ -1,11 +1,11 @@
 package com.ytempest.wanandroid.activity.main.home;
 
-import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 
 import com.ytempest.tool.util.DataUtils;
 import com.ytempest.tool.util.LogUtils;
-import com.ytempest.wanandroid.activity.main.home.HomePresenter.PageCtrl.State;
+import com.ytempest.wanandroid.utils.PageCtrl;
+import com.ytempest.wanandroid.utils.PageCtrl.State;
 import com.ytempest.wanandroid.base.presenter.BasePresenter;
 import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
@@ -15,10 +15,7 @@ import com.ytempest.wanandroid.http.observer.HandlerObserver;
 import com.ytempest.wanandroid.interactor.impl.BaseInteractor;
 import com.ytempest.wanandroid.utils.RxUtils;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.inject.Inject;
 
@@ -155,63 +152,4 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
                 });
     }
 
-    /**
-     * 文章页面页码状态控制器
-     */
-    static final class PageCtrl {
-        private final AtomicInteger version = new AtomicInteger();
-        private int nextPage = 0;
-        private boolean isRequesting;
-
-        int getVersion() {
-            return version.get();
-        }
-
-        boolean isSameVersion(int version) {
-            return this.version.get() == version;
-        }
-
-        int getNextPage() {
-            return nextPage;
-        }
-
-        boolean isRequesting() {
-            return isRequesting;
-        }
-
-        void moveTo(@State int state) {
-            switch (state) {
-                case State.REFRESH:
-                    isRequesting = true;
-                    nextPage = 0;
-                    version.incrementAndGet();
-                    break;
-
-                case State.LOAD_MORE:
-                    isRequesting = true;
-                    break;
-
-                case State.SUCCESS:
-                    isRequesting = false;
-                    nextPage++;
-                    break;
-
-                case State.FAIL:
-                    isRequesting = false;
-                    break;
-
-                default:
-                    break;
-            }
-        }
-
-        @IntDef({State.REFRESH, State.LOAD_MORE, State.SUCCESS, State.FAIL,})
-        @Retention(RetentionPolicy.SOURCE)
-        @interface State {
-            int REFRESH = 1;
-            int LOAD_MORE = 2;
-            int SUCCESS = 3;
-            int FAIL = 4;
-        }
-    }
 }
