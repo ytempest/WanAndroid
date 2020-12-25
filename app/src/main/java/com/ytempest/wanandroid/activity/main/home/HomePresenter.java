@@ -3,9 +3,6 @@ package com.ytempest.wanandroid.activity.main.home;
 import android.support.annotation.NonNull;
 
 import com.ytempest.tool.util.DataUtils;
-import com.ytempest.tool.util.LogUtils;
-import com.ytempest.wanandroid.utils.PageCtrl;
-import com.ytempest.wanandroid.utils.PageCtrl.State;
 import com.ytempest.wanandroid.base.presenter.BasePresenter;
 import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
@@ -13,6 +10,8 @@ import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.observer.HandlerObserver;
 import com.ytempest.wanandroid.interactor.impl.BaseInteractor;
+import com.ytempest.wanandroid.utils.PageCtrl;
+import com.ytempest.wanandroid.utils.PageCtrl.State;
 import com.ytempest.wanandroid.utils.RxUtils;
 
 import java.util.List;
@@ -28,7 +27,7 @@ import io.reactivex.Observable;
 public class HomePresenter extends BasePresenter<IHomeContract.View> implements IHomeContract.Presenter {
 
     private static final String TAG = HomePresenter.class.getSimpleName();
-    private final PageCtrl mPageState = new PageCtrl();
+    private final PageCtrl mPageCtrl = new PageCtrl();
 
     @Inject
     public HomePresenter(BaseInteractor interactor) {
@@ -43,11 +42,11 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
     @SuppressWarnings("unchecked")
     @Override
     public void loadHomeData() {
-        if (mPageState.isRequesting()) return;
-        mPageState.moveTo(State.REFRESH);
+        if (mPageCtrl.isRequesting()) return;
+        mPageCtrl.moveTo(State.REFRESH);
         Observable.merge(
                 mInteractor.getHttpHelper().getBannerList(),
-                mInteractor.getHttpHelper().getHomeArticleList(mPageState.getNextPage())
+                mInteractor.getHttpHelper().getHomeArticleList(mPageCtrl.getNextPage())
         ).compose(RxUtils.switchScheduler())
                 .subscribe(new HandlerObserver(mView, false) {
                     private List<BannerBean> mBannerList;
@@ -62,14 +61,14 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
                         }
 
                         if (!DataUtils.isNull(mBannerList, mArticleBean)) {
-                            mPageState.moveTo(State.SUCCESS);
+                            mPageCtrl.moveTo(State.SUCCESS);
                             mView.onHomeDataSuccess(mBannerList, mArticleBean);
                         }
                     }
 
                     @Override
                     protected void onFail(int code, Throwable e) {
-                        mPageState.moveTo(State.FAIL);
+                        mPageCtrl.moveTo(State.FAIL);
                         mView.onHomeDataFail(code);
                     }
                 });
@@ -77,47 +76,43 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
 
     @Override
     public void refreshHomeArticle() {
-        if (mPageState.isRequesting()) return;
-        mPageState.moveTo(State.REFRESH);
-        mInteractor.getHttpHelper().getHomeArticleList(mPageState.getNextPage())
+        if (mPageCtrl.isRequesting()) return;
+        mPageCtrl.moveTo(State.REFRESH);
+        mInteractor.getHttpHelper().getHomeArticleList(mPageCtrl.getNextPage())
                 .compose(RxUtils.switchScheduler())
                 .subscribe(new HandlerObserver<HomeArticleBean>(mView) {
                     @Override
                     protected void onSuccess(@NonNull HomeArticleBean homeArticleBean) {
                         mView.displayHomeArticle(true, homeArticleBean);
-                        mPageState.moveTo(PageCtrl.State.SUCCESS);
+                        mPageCtrl.moveTo(PageCtrl.State.SUCCESS);
                     }
 
                     @Override
                     protected void onFail(int code, Throwable e) {
                         super.onFail(code, e);
-                        mPageState.moveTo(PageCtrl.State.FAIL);
+                        mPageCtrl.moveTo(PageCtrl.State.FAIL);
                     }
                 });
     }
 
     @Override
     public void loadMoreHomeArticle() {
-        if (mPageState.isRequesting()) return;
-        mPageState.moveTo(PageCtrl.State.LOAD_MORE);
-        final int version = mPageState.getVersion();
-        mInteractor.getHttpHelper().getHomeArticleList(mPageState.getNextPage())
+        if (mPageCtrl.isRequesting()) return;
+        mPageCtrl.moveTo(PageCtrl.State.LOAD_MORE);
+        mInteractor.getHttpHelper().getHomeArticleList(mPageCtrl.getNextPage())
                 .compose(RxUtils.switchScheduler())
-                .filter(resp -> {
-                    LogUtils.d(TAG, "requestHomeArticle: 本次请求结果是否可用: " + mPageState.isSameVersion(version));
-                    return mPageState.isSameVersion(version);
-                })
+                .filter(mPageCtrl.filterDirtyData())
                 .subscribe(new HandlerObserver<HomeArticleBean>(mView) {
                     @Override
                     protected void onSuccess(@NonNull HomeArticleBean homeArticleBean) {
                         mView.displayHomeArticle(false, homeArticleBean);
-                        mPageState.moveTo(PageCtrl.State.SUCCESS);
+                        mPageCtrl.moveTo(PageCtrl.State.SUCCESS);
                     }
 
                     @Override
                     protected void onFail(int code, Throwable e) {
                         super.onFail(code, e);
-                        mPageState.moveTo(PageCtrl.State.FAIL);
+                        mPageCtrl.moveTo(PageCtrl.State.FAIL);
                     }
                 });
     }
