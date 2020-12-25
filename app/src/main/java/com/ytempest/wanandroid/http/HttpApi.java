@@ -5,6 +5,7 @@ import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
+import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 
 import java.util.List;
 
@@ -72,4 +73,9 @@ public interface HttpApi {
      */
     @POST("lg/uncollect/{id}/json")
     Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(@Path("id") long articleId);
+
+    /*项目*/
+
+    @GET("project/tree/json")
+    Observable<BaseResp<List<ProjectClassifyBean>>> getProjectClassify();
 }

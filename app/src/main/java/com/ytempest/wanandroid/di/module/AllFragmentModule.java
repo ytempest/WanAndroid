@@ -4,6 +4,7 @@ import com.ytempest.wanandroid.activity.main.home.HomeFrag;
 import com.ytempest.wanandroid.activity.main.knowledge.KnowledgeFrag;
 import com.ytempest.wanandroid.activity.main.navigation.NavigationFrag;
 import com.ytempest.wanandroid.activity.main.project.ProjectFrag;
+import com.ytempest.wanandroid.activity.main.project.content.ClassifyContentFrag;
 import com.ytempest.wanandroid.di.component.BaseFragmentComponent;
 
 import dagger.Module;
@@ -28,4 +29,6 @@ public abstract class AllFragmentModule {
     @ContributesAndroidInjector(modules = FragmentModules.EmptyModule.class)
     abstract ProjectFrag contributeProjectFragInjector();
 
+    @ContributesAndroidInjector(modules = FragmentModules.EmptyModule.class)
+    abstract ClassifyContentFrag contributeClassifyContentFragInjector();
 }
