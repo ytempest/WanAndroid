@@ -16,13 +16,13 @@ import com.ytempest.wanandroid.utils.JSON;
  * @author heqidu
  * @since 2020/12/24
  */
-@InjectLayout(R.layout.frag_classify_content)
-public class ClassifyContentFrag extends MvpFragment<ClassifyContentPresenter> implements IClassifyContentContract.View {
+@InjectLayout(R.layout.frag_project_content)
+public class ProjectContentFrag extends MvpFragment<ProjectContentPresenter> implements IProjectContentContract.View {
 
     private static final String KEY_CLASSIFY_DATA = "classify_data";
 
-    public static ClassifyContentFrag newInstance(ProjectClassifyBean data) {
-        ClassifyContentFrag frag = new ClassifyContentFrag();
+    public static ProjectContentFrag newInstance(ProjectClassifyBean data) {
+        ProjectContentFrag frag = new ProjectContentFrag();
         Bundle bundle = frag.getBundle();
         bundle.putString(KEY_CLASSIFY_DATA, JSON.toJson(data));
         return frag;

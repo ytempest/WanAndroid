@@ -7,7 +7,7 @@ import com.ytempest.wanandroid.base.view.IView;
  * @author heqidu
  * @since 2020/12/25
  */
-public interface IClassifyContentContract {
+public interface IProjectContentContract {
     interface View extends IView {
 
     }

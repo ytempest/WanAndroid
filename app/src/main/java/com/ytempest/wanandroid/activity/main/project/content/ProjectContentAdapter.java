@@ -10,15 +10,15 @@ import com.ytempest.wanandroid.utils.CoreFragPagerAdapter;
  * @author heqidu
  * @since 2020/12/25
  */
-public class ClassifyContentAdapter extends CoreFragPagerAdapter<ProjectClassifyBean> {
+public class ProjectContentAdapter extends CoreFragPagerAdapter<ProjectClassifyBean> {
 
-    public ClassifyContentAdapter(FragmentManager fm) {
+    public ProjectContentAdapter(FragmentManager fm) {
         super(fm);
     }
 
     @Override
     protected Fragment onCreateFragment(ProjectClassifyBean data, int pos) {
-        return ClassifyContentFrag.newInstance(data);
+        return ProjectContentFrag.newInstance(data);
     }
 
 }

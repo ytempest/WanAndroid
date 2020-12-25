@@ -9,10 +9,10 @@ import javax.inject.Inject;
  * @author heqidu
  * @since 2020/12/25
  */
-public class ClassifyContentPresenter extends BasePresenter<IClassifyContentContract.View> implements IClassifyContentContract.Presenter {
+public class ProjectContentPresenter extends BasePresenter<IProjectContentContract.View> implements IProjectContentContract.Presenter {
 
     @Inject
-    public ClassifyContentPresenter(BaseInteractor interactor) {
+    public ProjectContentPresenter(BaseInteractor interactor) {
         super(interactor);
     }
 }

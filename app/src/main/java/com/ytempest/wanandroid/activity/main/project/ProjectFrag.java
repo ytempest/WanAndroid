@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.tool.util.DataUtils;
 import com.ytempest.wanandroid.R;
-import com.ytempest.wanandroid.activity.main.project.content.ClassifyContentAdapter;
+import com.ytempest.wanandroid.activity.main.project.content.ProjectContentAdapter;
 import com.ytempest.wanandroid.base.fragment.MvpFragment;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 
@@ -33,12 +33,12 @@ public class ProjectFrag extends MvpFragment<ProjectPresenter> implements IProje
     TabLayout mTabLayout;
     @BindView(R.id.vp_project_content)
     ViewPager mViewPager;
-    private ClassifyContentAdapter mAdapter;
+    private ProjectContentAdapter mAdapter;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mAdapter = new ClassifyContentAdapter(getActivity().getSupportFragmentManager());
+        mAdapter = new ProjectContentAdapter(getActivity().getSupportFragmentManager());
         mViewPager.setAdapter(mAdapter);
 
         mTabLayout.setupWithViewPager(mViewPager);
