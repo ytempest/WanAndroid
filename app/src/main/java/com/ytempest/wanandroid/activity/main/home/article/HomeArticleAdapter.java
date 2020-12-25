@@ -69,7 +69,7 @@ public class HomeArticleAdapter extends CoreRecyclerAdapter<HomeArticleBean.Data
         holder.setText(R.id.tv_item_home_article_time, DateFormat.format(data.getShareDate()));
 
         ImageView collectView = holder.getViewById(R.id.iv_item_home_article_collect);
-        collectView.setImageResource(data.isCollect() ? R.drawable.ic_collect_select : R.drawable.ic_collect_normal_gray);
+        collectView.setSelected(data.isCollect());
         collectView.setTag(data);
         collectView.setOnClickListener(mOnCollectClickListener);
     }

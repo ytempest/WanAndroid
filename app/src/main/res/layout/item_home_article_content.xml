@@ -79,7 +79,7 @@
                 android:layout_width="26dp"
                 android:padding="2dp"
                 android:layout_height="26dp"
-                android:src="@drawable/ic_collect_normal_gray" />
+                android:src="@drawable/sl_collect_status" />
 
             <Space
                 android:layout_width="0dp"
