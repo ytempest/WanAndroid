@@ -76,10 +76,10 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
 
     @Override
     public void refreshHomeArticle() {
-        if (mPageCtrl.isRequesting()) return;
         mPageCtrl.moveTo(State.REFRESH);
         mInteractor.getHttpHelper().getHomeArticleList(mPageCtrl.getNextPage())
                 .compose(RxUtils.switchScheduler())
+                .filter(mPageCtrl.filterDirtyData())
                 .subscribe(new HandlerObserver<HomeArticleBean>(mView) {
                     @Override
                     protected void onSuccess(@NonNull HomeArticleBean homeArticleBean) {
