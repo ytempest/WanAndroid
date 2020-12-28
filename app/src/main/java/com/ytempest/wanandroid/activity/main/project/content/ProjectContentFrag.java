@@ -10,7 +10,8 @@ import android.view.View;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.activity.main.project.content.list.ContentListAdapter;
-import com.ytempest.wanandroid.base.fragment.MvpFragment;
+import com.ytempest.wanandroid.base.fragment.load.LoaderFrag;
+import com.ytempest.wanandroid.base.fragment.load.ViewType;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 import com.ytempest.wanandroid.utils.JSON;
@@ -25,7 +26,7 @@ import butterknife.BindView;
  * @since 2020/12/24
  */
 @InjectLayout(R.layout.frag_project_content)
-public class ProjectContentFrag extends MvpFragment<ProjectContentPresenter> implements IProjectContentContract.View {
+public class ProjectContentFrag extends LoaderFrag<ProjectContentPresenter> implements IProjectContentContract.View {
 
     private static final String KEY_CLASSIFY_DATA = "classify_data";
 
@@ -73,16 +74,31 @@ public class ProjectContentFrag extends MvpFragment<ProjectContentPresenter> imp
                 }
             }
         });
+        getLoader().showView(ViewType.LOAD);
         mPresenter.refreshContent(mClassifyBean);
     }
 
 
     @Override
+    protected void onReloadClick() {
+        super.onReloadClick();
+        mPresenter.refreshContent(mClassifyBean);
+    }
+
+    @Override
     public void displayProjectContent(ProjectContentBean projectContent) {
+        getLoader().hideAll();
         if (projectContent.isOver()) {
             showToast(R.string.arrived_end);
         } else {
             mAdapter.display(projectContent.getDatas());
+        }
+    }
+
+    @Override
+    public void onProjectContentFail(int code) {
+        if (mAdapter.isEmpty()) {
+            getLoader().showView(ViewType.ERR);
         }
     }
 

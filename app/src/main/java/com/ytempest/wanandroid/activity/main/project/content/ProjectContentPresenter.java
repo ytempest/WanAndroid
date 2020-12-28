@@ -54,7 +54,7 @@ public class ProjectContentPresenter extends BasePresenter<IProjectContentContra
 
                     @Override
                     protected void onFail(int code, Throwable e) {
-                        super.onFail(code, e);
+                        mView.onProjectContentFail(code);
                         mPageCtrl.moveTo(State.FAIL);
                     }
                 });

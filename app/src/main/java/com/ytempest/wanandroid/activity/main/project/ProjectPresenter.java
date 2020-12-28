@@ -32,6 +32,11 @@ public class ProjectPresenter extends BasePresenter<IProjectContract.View> imple
                     protected void onSuccess(@NonNull List<ProjectClassifyBean> list) {
                         mView.onProjectClassifyReceived(list);
                     }
+
+                    @Override
+                    protected void onFail(int code, Throwable e) {
+                        mView.onProjectClassifyFail(code);
+                    }
                 });
     }
 }

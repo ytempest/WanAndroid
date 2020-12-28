@@ -14,6 +14,8 @@ public interface IProjectContract {
     interface View extends IView {
 
         void onProjectClassifyReceived(List<ProjectClassifyBean> list);
+
+        void onProjectClassifyFail(int code);
     }
 
     interface Presenter extends IPresenter {

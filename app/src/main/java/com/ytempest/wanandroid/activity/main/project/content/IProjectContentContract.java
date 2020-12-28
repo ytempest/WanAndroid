@@ -13,6 +13,8 @@ public interface IProjectContentContract {
     interface View extends IView {
         void displayProjectContent(ProjectContentBean projectContent);
 
+        void onProjectContentFail(int code);
+
         void onMoreProjectContentLoaded(ProjectContentBean projectContent);
 
         void onProjectArticleCollectSuccess(ProjectContentBean.DatasBean bean);

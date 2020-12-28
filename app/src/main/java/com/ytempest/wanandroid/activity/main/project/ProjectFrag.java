@@ -12,7 +12,8 @@ import android.widget.TextView;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.tool.util.DataUtils;
 import com.ytempest.wanandroid.R;
-import com.ytempest.wanandroid.base.fragment.MvpFragment;
+import com.ytempest.wanandroid.base.fragment.load.LoaderFrag;
+import com.ytempest.wanandroid.base.fragment.load.ViewType;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 
 import java.util.List;
@@ -24,7 +25,7 @@ import butterknife.BindView;
  * @since 2020/6/23
  */
 @InjectLayout(R.layout.frag_project)
-public class ProjectFrag extends MvpFragment<ProjectPresenter> implements IProjectContract.View {
+public class ProjectFrag extends LoaderFrag<ProjectPresenter> implements IProjectContract.View {
 
     private static final String TAG = ProjectFrag.class.getSimpleName();
 
@@ -60,13 +61,26 @@ public class ProjectFrag extends MvpFragment<ProjectPresenter> implements IProje
             }
         });
 
+        getLoader().showView(ViewType.LOAD);
+        mPresenter.getProjectClassify();
+    }
+
+    @Override
+    protected void onReloadClick() {
+        super.onReloadClick();
         mPresenter.getProjectClassify();
     }
 
     @Override
     public void onProjectClassifyReceived(List<ProjectClassifyBean> list) {
+        getLoader().hideAll();
         mAdapter.display(list);
         updateTabView(list);
+    }
+
+    @Override
+    public void onProjectClassifyFail(int code) {
+        getLoader().showView(ViewType.ERR);
     }
 
     private void updateTabView(List<ProjectClassifyBean> list) {
