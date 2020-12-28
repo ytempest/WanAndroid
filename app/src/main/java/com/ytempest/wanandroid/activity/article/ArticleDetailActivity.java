@@ -153,9 +153,17 @@ public class ArticleDetailActivity extends MvpActivity<ArticleDetailPresenter> i
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_article_detail, menu);
-        refreshCollectArticleView(mArticleDetail.isCollected());
+        initArticleCollect(menu);
         Utils.enableMenuShowIcon(menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    private void initArticleCollect(Menu menu) {
+        if (mArticleDetail.isShowCollect()) {
+            refreshCollectArticleView(mArticleDetail.isCollected());
+        } else {
+            menu.findItem(R.id.item_article_detail_collect).setVisible(false);
+        }
     }
 
     @Override

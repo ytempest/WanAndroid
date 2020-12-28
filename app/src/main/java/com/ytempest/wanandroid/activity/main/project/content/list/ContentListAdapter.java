@@ -9,7 +9,9 @@ import android.widget.ImageView;
 import com.ytempest.tool.adapter.CoreRecyclerAdapter;
 import com.ytempest.tool.adapter.CoreViewHolder;
 import com.ytempest.wanandroid.R;
+import com.ytempest.wanandroid.activity.article.ArticleDetailActivity;
 import com.ytempest.wanandroid.activity.main.project.content.ProjectContentPresenter;
+import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 import com.ytempest.wanandroid.utils.DateFormat;
 import com.ytempest.wanandroid.utils.ImgLoader;
@@ -36,7 +38,9 @@ public class ContentListAdapter extends CoreRecyclerAdapter<ProjectContentBean.D
     @Override
     protected CoreViewHolder onCreateView(LayoutInflater inflater, ViewGroup viewGroup, int position) {
         View view = inflater.inflate(R.layout.item_project_content_list, viewGroup, false);
-        return new CoreViewHolder(view);
+        CoreViewHolder holder = new CoreViewHolder(view);
+        holder.setNeedClick(true);
+        return holder;
     }
 
     @Override
@@ -55,5 +59,12 @@ public class ContentListAdapter extends CoreRecyclerAdapter<ProjectContentBean.D
         View collectView = holder.getViewById(R.id.tv_item_project_content_collect);
         collectView.setTag(data);
         collectView.setOnClickListener(mCollectClickListener);
+    }
+
+    @Override
+    protected void onItemClick(CoreViewHolder holder, View view, int position) {
+        super.onItemClick(holder, view, position);
+        ProjectContentBean.DatasBean data = getData(position);
+        ArticleDetailActivity.start(view.getContext(), ArticleDetailBean.from(data));
     }
 }

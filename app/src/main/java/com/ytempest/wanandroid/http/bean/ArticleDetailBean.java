@@ -53,6 +53,12 @@ public class ArticleDetailBean {
 
     /*Ext*/
 
+    private boolean isShowCollect = true;
+
+    public boolean isShowCollect() {
+        return isShowCollect;
+    }
+
     public String toJson() {
         return JSON.toJson(this);
     }
@@ -63,5 +69,11 @@ public class ArticleDetailBean {
 
     public static ArticleDetailBean from(HomeArticleBean.DatasBean bean) {
         return new ArticleDetailBean(bean.getId(), bean.getTitle(), bean.getLink(), bean.isCollect());
+    }
+
+    public static ArticleDetailBean from(ProjectContentBean.DatasBean bean) {
+        ArticleDetailBean result = new ArticleDetailBean(bean.getId(), bean.getTitle(), bean.getLink(), bean.isCollect());
+        result.isShowCollect = false;
+        return result;
     }
 }
