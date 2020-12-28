@@ -406,6 +406,21 @@ public class ProjectContentBean {
             this.tags = tags;
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            DatasBean datasBean = (DatasBean) o;
+
+            return id == datasBean.id;
+        }
+
+        @Override
+        public int hashCode() {
+            return id;
+        }
+
         public static class TagsBean {
             /**
              * name : 项目

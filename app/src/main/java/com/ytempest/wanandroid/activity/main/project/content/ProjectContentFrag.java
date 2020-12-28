@@ -62,7 +62,7 @@ public class ProjectContentFrag extends MvpFragment<ProjectContentPresenter> imp
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mAdapter = new ContentListAdapter();
+        mAdapter = new ContentListAdapter(mPresenter);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -93,5 +93,15 @@ public class ProjectContentFrag extends MvpFragment<ProjectContentPresenter> imp
         } else {
             mAdapter.addData(projectContent.getDatas());
         }
+    }
+
+    @Override
+    public void onProjectArticleCollectSuccess(ProjectContentBean.DatasBean bean) {
+        showToast(R.string.collect_success);
+    }
+
+    @Override
+    public void onProjectArticleCollectFail(int code, boolean onceCollected, ProjectContentBean.DatasBean bean) {
+        showToast(onceCollected ? R.string.once_collected : R.string.collect_fail);
     }
 }

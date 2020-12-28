@@ -44,5 +44,7 @@
     <string name="net_sneak_off">网络开小差了~</string>
     <string name="arrived_end">已经到达尽头了~</string>
     <string name="project_url">项目地址</string>
+    <string name="once_collected">你已经收藏过了~</string>
+    <string name="collect_success">收藏成功~</string>
 
 </resources>

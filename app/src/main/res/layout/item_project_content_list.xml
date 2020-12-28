@@ -38,12 +38,12 @@
 
         <ImageView
             android:id="@+id/iv_item_project_content_icon"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
             android:src="@drawable/ic_author"
-            app:layout_constraintBottom_toBottomOf="@id/iv_item_project_content_collect"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_project_content_collect"
             app:layout_constraintStart_toEndOf="@id/space_item_project_content_middle"
-            app:layout_constraintTop_toTopOf="@id/iv_item_project_content_collect"
+            app:layout_constraintTop_toTopOf="@id/tv_item_project_content_collect"
             app:layout_constraintVertical_chainStyle="packed" />
 
         <TextView
@@ -55,19 +55,25 @@
             android:maxLines="1"
             android:textColor="@color/common_black_text"
             android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@id/iv_item_project_content_collect"
-            app:layout_constraintEnd_toStartOf="@id/iv_item_project_content_collect"
+            app:layout_constraintBottom_toBottomOf="@id/tv_item_project_content_collect"
+            app:layout_constraintEnd_toStartOf="@id/tv_item_project_content_collect"
             app:layout_constraintHorizontal_weight="1"
             app:layout_constraintStart_toEndOf="@id/iv_item_project_content_icon"
-            app:layout_constraintTop_toTopOf="@id/iv_item_project_content_collect"
+            app:layout_constraintTop_toTopOf="@id/tv_item_project_content_collect"
             tools:text="User" />
 
-        <ImageView
-            android:id="@+id/iv_item_project_content_collect"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:padding="2dp"
-            android:src="@drawable/ic_collect_normal_gray"
+        <TextView
+            android:id="@+id/tv_item_project_content_collect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:paddingHorizontal="4dp"
+            android:paddingVertical="2dp"
+            android:text="@string/collect"
+            android:textColor="@color/main_color"
+            android:textSize="14sp"
             app:layout_constraintBottom_toTopOf="@id/tv_item_project_content_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/tv_item_project_content_user"

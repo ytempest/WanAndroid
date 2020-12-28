@@ -1,8 +1,9 @@
-package com.ytempest.wanandroid.activity.main.project.content;
+package com.ytempest.wanandroid.activity.main.project;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 
+import com.ytempest.wanandroid.activity.main.project.content.ProjectContentFrag;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.utils.CoreFragPagerAdapter;
 
@@ -10,9 +11,9 @@ import com.ytempest.wanandroid.utils.CoreFragPagerAdapter;
  * @author heqidu
  * @since 2020/12/25
  */
-public class ProjectContentAdapter extends CoreFragPagerAdapter<ProjectClassifyBean> {
+public class ProjectClassifyAdapter extends CoreFragPagerAdapter<ProjectClassifyBean> {
 
-    public ProjectContentAdapter(FragmentManager fm) {
+    public ProjectClassifyAdapter(FragmentManager fm) {
         super(fm);
     }
 

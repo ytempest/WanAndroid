@@ -14,11 +14,17 @@ public interface IProjectContentContract {
         void displayProjectContent(ProjectContentBean projectContent);
 
         void onMoreProjectContentLoaded(ProjectContentBean projectContent);
+
+        void onProjectArticleCollectSuccess(ProjectContentBean.DatasBean bean);
+
+        void onProjectArticleCollectFail(int code, boolean onceCollected, ProjectContentBean.DatasBean bean);
     }
 
     interface Presenter extends IPresenter {
         void refreshContent(ProjectClassifyBean classifyBean);
 
         void loadMoreProjectContent(ProjectClassifyBean classifyBean);
+
+        void addProjectArticleCollect(ProjectContentBean.DatasBean bean);
     }
 }
