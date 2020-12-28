@@ -1,8 +1,6 @@
 package com.ytempest.wanandroid.activity.main.home;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.NestedScrollView;
@@ -14,15 +12,13 @@ import android.view.View;
 import com.ytempest.banner.Banner;
 import com.ytempest.banner.transformers.Transformers;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
-import com.ytempest.tool.util.NetUtils;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.activity.main.home.article.HomeArticleAdapter;
-import com.ytempest.wanandroid.base.fragment.MvpFragment;
+import com.ytempest.wanandroid.base.fragment.load.LoaderFrag;
+import com.ytempest.wanandroid.base.fragment.load.ViewType;
 import com.ytempest.wanandroid.helper.ArticleDetailHelper;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
-import com.ytempest.wanandroid.widget.MainLoadView;
-import com.ytempest.wanandroid.widget.MaskLayout;
 
 import java.util.List;
 
@@ -33,14 +29,10 @@ import butterknife.BindView;
  * @since 2020/6/23
  */
 @InjectLayout(R.layout.frag_home)
-public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContract.View {
+public class HomeFrag extends LoaderFrag<HomePresenter> implements IHomeContract.View {
 
     private static final String TAG = HomeFrag.class.getSimpleName();
 
-    @BindView(R.id.view_main_load_view)
-    MainLoadView mLoadView;
-    @BindView(R.id.layout_main_mask)
-    MaskLayout mErrorLayout;
     @BindView(R.id.view_main_pull_refresh)
     SwipeRefreshLayout mRefreshLayout;
     @BindView(R.id.view_main_nested_scroll)
@@ -59,21 +51,6 @@ public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContrac
     }
 
     private void initView() {
-        mErrorLayout.setMaskActionListener(new MaskLayout.SimpleMaskActionListener() {
-            @Override
-            public void onMaskCreated(View maskView) {
-                super.onMaskCreated(maskView);
-                maskView.findViewById(R.id.tv_net_error_retry)
-                        .setOnClickListener(v -> {
-                            if (NetUtils.isNetAvailable(getContext())) {
-                                mLoadView.show();
-                                mPresenter.loadHomeData();
-                            }
-                        });
-                maskView.findViewById(R.id.tv_net_error_setting_net)
-                        .setOnClickListener(v -> startActivity(new Intent(Settings.ACTION_SETTINGS)));
-            }
-        });
         mRefreshLayout.setColorSchemeResources(R.color.main_color);
         mRefreshLayout.setOnRefreshListener(() -> mPresenter.refreshHomeArticle());
 
@@ -109,7 +86,7 @@ public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContrac
     }
 
     private void initData() {
-        mLoadView.show();
+        getLoader().showView(ViewType.LOAD);
         mPresenter.loadHomeData();
         ArticleDetailHelper.getInstance().getArticleUpdateDetail().observe(getViewLifecycleOwner(), bean -> {
             if (bean == null) return;
@@ -124,17 +101,21 @@ public class HomeFrag extends MvpFragment<HomePresenter> implements IHomeContrac
     }
 
     @Override
+    protected void onReloadClick() {
+        super.onReloadClick();
+        mPresenter.loadHomeData();
+    }
+
+    @Override
     public void onHomeDataSuccess(List<BannerBean> bannerList, HomeArticleBean bean) {
-        mLoadView.hide();
-        mErrorLayout.hideMask();
+        getLoader().hideAll();
         mBannerView.display(bannerList);
         mAdapter.display(bean.getDatas());
     }
 
     @Override
     public void onHomeDataFail(int code) {
-        mLoadView.hide();
-        mErrorLayout.showMask();
+        getLoader().showView(ViewType.ERR);
     }
 
     @Override
