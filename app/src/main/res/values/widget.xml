@@ -9,4 +9,17 @@
     <declare-styleable name="MaskLayout">
         <attr name="mask_layout" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="FlowLayout">
+        <!--copy from android:gravity-->
+        <attr name="row_gravity" format="flags">
+            <flag name="top" value="0x30" />
+            <flag name="bottom" value="0x50" />
+            <flag name="left" value="0x03" />
+            <flag name="right" value="0x05" />
+            <flag name="center_vertical" value="0x10" />
+            <flag name="center_horizontal" value="0x01" />
+            <flag name="center" value="0x11" />
+        </attr>
+    </declare-styleable>
 </resources>
