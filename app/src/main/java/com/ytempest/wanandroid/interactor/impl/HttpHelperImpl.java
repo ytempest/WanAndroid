@@ -7,6 +7,7 @@ import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.bean.MyCollectionBean;
+import com.ytempest.wanandroid.http.bean.NavigationListBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 import com.ytempest.wanandroid.interactor.HttpHelper;
@@ -73,6 +74,11 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(long articleId) {
         return mHttpApi.cancelMyCollectArticle(articleId);
+    }
+
+    @Override
+    public Observable<BaseResp<List<NavigationListBean>>> getNavigationList() {
+        return mHttpApi.getNavigationList();
     }
 
     @Override

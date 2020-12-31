@@ -6,6 +6,7 @@ import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.bean.MyCollectionBean;
+import com.ytempest.wanandroid.http.bean.NavigationListBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 
@@ -92,6 +93,11 @@ public interface HttpApi {
      */
     @POST("lg/uncollect/{id}/json")
     Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(@Path("id") long articleId);
+
+    /*导航*/
+
+    @GET("navi/json")
+    Observable<BaseResp<List<NavigationListBean>>> getNavigationList();
 
     /*项目*/
 
