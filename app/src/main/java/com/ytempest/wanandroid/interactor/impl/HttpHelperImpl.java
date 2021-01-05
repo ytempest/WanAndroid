@@ -7,6 +7,7 @@ import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.bean.MyCollectionBean;
+import com.ytempest.wanandroid.http.bean.OutsideArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.NavigationListBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
@@ -62,7 +63,7 @@ public class HttpHelperImpl implements HttpHelper {
     }
 
     @Override
-    public Observable<BaseResp<Object>> addCollectOutsideArticle(String title, String author, String link) {
+    public Observable<BaseResp<OutsideArticleCollectBean>> addCollectOutsideArticle(String title, String author, String link) {
         return mHttpApi.addCollectOutsideArticle(title, author, link);
     }
 

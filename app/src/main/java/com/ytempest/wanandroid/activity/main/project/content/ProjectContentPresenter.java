@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.ytempest.tool.util.LogUtils;
 import com.ytempest.wanandroid.base.presenter.BasePresenter;
 import com.ytempest.wanandroid.http.bean.MyCollectionBean;
+import com.ytempest.wanandroid.http.bean.OutsideArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 import com.ytempest.wanandroid.http.observer.HandlerObserver;
@@ -87,9 +88,9 @@ public class ProjectContentPresenter extends BasePresenter<IProjectContentContra
         mView.showLoading();
         mInteractor.getHttpHelper().addCollectOutsideArticle(bean.getTitle(), bean.getAuthor(), bean.getLink())
                 .compose(RxUtils.switchScheduler())
-                .subscribe(new HandlerObserver<Object>(mView) {
+                .subscribe(new HandlerObserver<OutsideArticleCollectBean>(mView) {
                     @Override
-                    protected void onSuccess(@NonNull Object data) {
+                    protected void onSuccess(@NonNull OutsideArticleCollectBean data) {
                         mView.stopLoading();
                         bean.setCollect(true);
                         mView.onProjectArticleCollectSuccess(bean);

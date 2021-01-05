@@ -1,6 +1,11 @@
 package com.ytempest.wanandroid.http.bean;
 
+import android.support.annotation.IntDef;
+
 import com.ytempest.wanandroid.utils.JSON;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author heqidu
@@ -11,9 +16,12 @@ public class ArticleDetailBean {
     private String title;
     private String url;
     private boolean isCollected;
+    private String author;
 
-    private ArticleDetailBean(long articleId, String title, String url, boolean isCollected) {
+    private ArticleDetailBean(@Source int source, long articleId, String author, String title, String url, boolean isCollected) {
+        this.source = source;
         this.articleId = articleId;
+        this.author = author;
         this.title = title;
         this.url = url;
         this.isCollected = isCollected;
@@ -51,12 +59,26 @@ public class ArticleDetailBean {
         isCollected = collected;
     }
 
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
     /*Ext*/
 
-    private boolean isShowCollect = true;
+    @Source
+    private final int source;
+
+    @Source
+    public int getSource() {
+        return source;
+    }
 
     public boolean isShowCollect() {
-        return isShowCollect;
+        return source == Source.HOME;
     }
 
     public String toJson() {
@@ -68,12 +90,26 @@ public class ArticleDetailBean {
     }
 
     public static ArticleDetailBean from(HomeArticleBean.DatasBean bean) {
-        return new ArticleDetailBean(bean.getId(), bean.getTitle(), bean.getLink(), bean.isCollect());
+        return new ArticleDetailBean(Source.HOME, bean.getId(), bean.getAuthor(), bean.getTitle(), bean.getLink(), bean.isCollect());
     }
 
     public static ArticleDetailBean from(ProjectContentBean.DatasBean bean) {
-        ArticleDetailBean result = new ArticleDetailBean(bean.getId(), bean.getTitle(), bean.getLink(), bean.isCollect());
-        result.isShowCollect = false;
-        return result;
+        return new ArticleDetailBean(Source.PROJECT, bean.getId(), bean.getAuthor(), bean.getTitle(), bean.getLink(), bean.isCollect());
+    }
+
+    public static ArticleDetailBean from(NavigationListBean.ArticlesBean bean) {
+        return new ArticleDetailBean(Source.NAVIGATION, bean.getId(), bean.getAuthor(), bean.getTitle(), bean.getLink(), bean.isCollect());
+    }
+
+    @IntDef({
+            Source.HOME,
+            Source.PROJECT,
+            Source.NAVIGATION,
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Source {
+        int HOME = 1;
+        int PROJECT = 2;
+        int NAVIGATION = 3;
     }
 }

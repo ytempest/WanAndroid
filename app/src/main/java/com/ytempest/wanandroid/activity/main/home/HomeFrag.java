@@ -17,6 +17,7 @@ import com.ytempest.wanandroid.activity.main.home.article.HomeArticleAdapter;
 import com.ytempest.wanandroid.base.fragment.load.LoaderFrag;
 import com.ytempest.wanandroid.base.fragment.load.ViewType;
 import com.ytempest.wanandroid.helper.ArticleDetailHelper;
+import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 
@@ -89,7 +90,7 @@ public class HomeFrag extends LoaderFrag<HomePresenter> implements IHomeContract
         getLoader().showView(ViewType.LOAD);
         mPresenter.loadHomeData();
         ArticleDetailHelper.getInstance().getArticleUpdateDetail().observe(getViewLifecycleOwner(), bean -> {
-            if (bean == null) return;
+            if (bean == null || bean.getSource() != ArticleDetailBean.Source.HOME) return;
             for (HomeArticleBean.DatasBean data : mAdapter.getSrcDataList()) {
                 if (data.getId() == bean.getArticleId()) {
                     data.setCollect(bean.isCollected());

@@ -8,8 +8,9 @@ import android.widget.TextView;
 
 import com.ytempest.tool.adapter.CoreRecyclerAdapter;
 import com.ytempest.tool.adapter.CoreViewHolder;
-import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.R;
+import com.ytempest.wanandroid.activity.article.ArticleDetailActivity;
+import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.http.bean.NavigationListBean;
 import com.ytempest.wanandroid.widget.TabFlowLayout;
 
@@ -29,7 +30,7 @@ public class ContentAdapter extends CoreRecyclerAdapter<NavigationListBean> {
 
     private final View.OnClickListener mArticleTabClickListener = v -> {
         NavigationListBean.ArticlesBean article = (NavigationListBean.ArticlesBean) v.getTag();
-        ToastUtils.show(v.getContext(), article.getTitle());
+        ArticleDetailActivity.start(v.getContext(), ArticleDetailBean.from(article));
     };
 
     @Override
