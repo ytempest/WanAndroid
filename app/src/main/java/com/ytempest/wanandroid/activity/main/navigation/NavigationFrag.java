@@ -57,7 +57,7 @@ public class NavigationFrag extends LoaderFrag<NavaigationPresenter> implements 
 
         mContentListView.setHasFixedSize(true);
         mContentListView.setLayoutManager(mContentManager = new LinearLayoutManager(getContext()));
-        mContentListView.setAdapter(mContentAdapter = new ContentAdapter());
+        mContentListView.setAdapter(mContentAdapter = new ContentAdapter(mPresenter));
         mContentListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
@@ -103,5 +103,15 @@ public class NavigationFrag extends LoaderFrag<NavaigationPresenter> implements 
     protected void onReloadClick() {
         super.onReloadClick();
         loadData();
+    }
+
+    @Override
+    public void onNavigationArticleCollectSuccess(NavigationListBean.ArticlesBean article) {
+        showToast(R.string.collect_success);
+    }
+
+    @Override
+    public void onNavigationArticleCollectFail(int code, boolean onceCollected, NavigationListBean.ArticlesBean article) {
+        showToast(onceCollected ? R.string.once_collected : R.string.collect_fail);
     }
 }

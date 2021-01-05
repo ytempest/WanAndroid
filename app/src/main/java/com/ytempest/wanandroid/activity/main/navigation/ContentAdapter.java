@@ -22,6 +22,12 @@ public class ContentAdapter extends CoreRecyclerAdapter<NavigationListBean> {
 
     private static final String TAG = ContentAdapter.class.getSimpleName();
 
+    private final NavaigationPresenter mPresenter;
+
+    public ContentAdapter(NavaigationPresenter presenter) {
+        mPresenter = presenter;
+    }
+
     @Override
     protected CoreViewHolder onCreateView(LayoutInflater inflater, ViewGroup viewGroup, int position) {
         View view = inflater.inflate(R.layout.item_navigation_content, viewGroup, false);
@@ -31,6 +37,12 @@ public class ContentAdapter extends CoreRecyclerAdapter<NavigationListBean> {
     private final View.OnClickListener mArticleTabClickListener = v -> {
         NavigationListBean.ArticlesBean article = (NavigationListBean.ArticlesBean) v.getTag();
         ArticleDetailActivity.start(v.getContext(), ArticleDetailBean.from(article));
+    };
+
+    private final View.OnLongClickListener mArticleTabLongClickListener = v -> {
+        NavigationListBean.ArticlesBean article = (NavigationListBean.ArticlesBean) v.getTag();
+        ContentAdapter.this.mPresenter.addCollectOutsideArticle(article);
+        return true;
     };
 
     @Override
@@ -49,6 +61,7 @@ public class ContentAdapter extends CoreRecyclerAdapter<NavigationListBean> {
                 TextView tabView = view.findViewById(R.id.tv_item_navigation_content_detail);
                 tabView.setTag(article);
                 tabView.setOnClickListener(mArticleTabClickListener);
+                tabView.setOnLongClickListener(mArticleTabLongClickListener);
                 tabView.setText(article.getTitle());
             }
         });

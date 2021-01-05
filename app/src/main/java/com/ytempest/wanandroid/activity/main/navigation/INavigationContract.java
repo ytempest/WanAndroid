@@ -16,9 +16,15 @@ public interface INavigationContract {
         void displayNavigationList(List<NavigationListBean> list);
 
         void onNavigationListFail(int code);
+
+        void onNavigationArticleCollectSuccess(NavigationListBean.ArticlesBean article);
+
+        void onNavigationArticleCollectFail(int code, boolean onceCollected, NavigationListBean.ArticlesBean article);
     }
 
     interface Presenter extends IPresenter {
         void getNavigationList();
+
+        void addCollectOutsideArticle(NavigationListBean.ArticlesBean article);
     }
 }
