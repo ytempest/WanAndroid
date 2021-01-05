@@ -8,4 +8,5 @@
     android:background="@drawable/bg_blue_frame"
     android:paddingHorizontal="13dp"
     android:paddingVertical="6dp"
-    android:textColor="@color/common_light_gray_text" />
+    android:textColor="@color/common_light_gray_text"
+    android:textSize="14sp" />

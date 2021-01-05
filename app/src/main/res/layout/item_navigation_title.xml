@@ -6,4 +6,4 @@
     android:background="@drawable/sl_navigation_title_item"
     android:gravity="center"
     android:textColor="@color/tab_navigation_title_item"
-    android:textSize="15.5sp" />
+    android:textSize="14.5sp" />

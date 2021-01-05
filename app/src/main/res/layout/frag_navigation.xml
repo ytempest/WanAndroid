@@ -11,7 +11,7 @@
 
         <com.ytempest.wanandroid.widget.VerticalTabLayout
             android:id="@+id/group_navigation_title_list"
-            android:layout_width="105dp"
+            android:layout_width="97dp"
             android:layout_height="match_parent"
             android:overScrollMode="never" />
 
@@ -19,7 +19,7 @@
             android:id="@+id/group_navigation_content_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"
+            android:background="@color/common_deep_bg"
             android:overScrollMode="never" />
 
     </LinearLayout>
