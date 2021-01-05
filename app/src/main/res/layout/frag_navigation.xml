@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
+        <com.ytempest.wanandroid.widget.VerticalTabLayout
             android:id="@+id/group_navigation_title_list"
             android:layout_width="105dp"
             android:layout_height="match_parent"

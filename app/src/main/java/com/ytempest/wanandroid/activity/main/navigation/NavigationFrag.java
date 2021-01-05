@@ -12,6 +12,7 @@ import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.fragment.load.LoaderFrag;
 import com.ytempest.wanandroid.base.fragment.load.ViewType;
 import com.ytempest.wanandroid.http.bean.NavigationListBean;
+import com.ytempest.wanandroid.widget.VerticalTabLayout;
 
 import java.util.List;
 
@@ -27,20 +28,32 @@ public class NavigationFrag extends LoaderFrag<NavaigationPresenter> implements 
     private static final String TAG = NavigationFrag.class.getSimpleName();
 
     @BindView(R.id.group_navigation_title_list)
-    RecyclerView mTitleListView;
+    VerticalTabLayout mTitleTabLayout;
     @BindView(R.id.group_navigation_content_list)
     RecyclerView mContentListView;
-    private NavigationTitleAdapter mTitleAdapter;
     private NavigationContentAdapter mContentAdapter;
     private LinearLayoutManager mContentManager;
+    private boolean isFromTab;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mTitleListView.setHasFixedSize(true);
-        mTitleListView.setLayoutManager(new LinearLayoutManager(getContext()));
-        mTitleAdapter = new NavigationTitleAdapter();
-        mTitleListView.setAdapter(mTitleAdapter);
+        mTitleTabLayout.addTabActonListener(new VerticalTabLayout.TabActonListener() {
+            @Override
+            public void onTabClick(View view, int position) {
+                scrollContentToPosition(position, true);
+            }
+
+            @Override
+            public void onTabSelected(View view, int position) {
+                view.setSelected(true);
+            }
+
+            @Override
+            public void onTabUnselected(View view, int position) {
+                view.setSelected(false);
+            }
+        });
 
         mContentListView.setHasFixedSize(true);
         mContentListView.setLayoutManager(mContentManager = new LinearLayoutManager(getContext()));
@@ -50,8 +63,14 @@ public class NavigationFrag extends LoaderFrag<NavaigationPresenter> implements 
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 if (newState == RecyclerView.SCROLL_STATE_IDLE && !mContentAdapter.isEmpty()) {
-                    int firstVisiblePosition = mContentManager.findFirstVisibleItemPosition();
-                    mTitleAdapter.setSelectPosition(firstVisiblePosition);
+                    if (isFromTab) {
+                        // 重置数据
+                        isFromTab = false;
+
+                    } else {
+                        int firstVisiblePosition = mContentManager.findFirstVisibleItemPosition();
+                        mTitleTabLayout.smoothScrollToPosition(firstVisiblePosition);
+                    }
                 }
             }
         });
@@ -63,10 +82,15 @@ public class NavigationFrag extends LoaderFrag<NavaigationPresenter> implements 
         mPresenter.getNavigationList();
     }
 
+    private void scrollContentToPosition(int pos, boolean isFromTab) {
+        this.isFromTab = isFromTab;
+        mContentListView.smoothScrollToPosition(pos);
+    }
+
     @Override
     public void displayNavigationList(List<NavigationListBean> list) {
         getLoader().hideAll();
-        mTitleAdapter.display(list);
+        mTitleTabLayout.setAdapter(new TitleAdapter(list));
         mContentAdapter.display(list);
     }
 
