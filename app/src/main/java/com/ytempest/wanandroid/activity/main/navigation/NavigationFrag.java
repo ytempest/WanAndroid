@@ -31,7 +31,7 @@ public class NavigationFrag extends LoaderFrag<NavaigationPresenter> implements 
     VerticalTabLayout mTitleTabLayout;
     @BindView(R.id.group_navigation_content_list)
     RecyclerView mContentListView;
-    private NavigationContentAdapter mContentAdapter;
+    private ContentAdapter mContentAdapter;
     private LinearLayoutManager mContentManager;
     private boolean isFromTab;
 
@@ -57,7 +57,7 @@ public class NavigationFrag extends LoaderFrag<NavaigationPresenter> implements 
 
         mContentListView.setHasFixedSize(true);
         mContentListView.setLayoutManager(mContentManager = new LinearLayoutManager(getContext()));
-        mContentListView.setAdapter(mContentAdapter = new NavigationContentAdapter());
+        mContentListView.setAdapter(mContentAdapter = new ContentAdapter());
         mContentListView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {

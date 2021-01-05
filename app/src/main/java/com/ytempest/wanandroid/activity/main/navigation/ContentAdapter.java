@@ -17,9 +17,9 @@ import com.ytempest.wanandroid.widget.TabFlowLayout;
  * @author heqidu
  * @since 2020/12/29
  */
-public class NavigationContentAdapter extends CoreRecyclerAdapter<NavigationListBean> {
+public class ContentAdapter extends CoreRecyclerAdapter<NavigationListBean> {
 
-    private static final String TAG = NavigationContentAdapter.class.getSimpleName();
+    private static final String TAG = ContentAdapter.class.getSimpleName();
 
     @Override
     protected CoreViewHolder onCreateView(LayoutInflater inflater, ViewGroup viewGroup, int position) {
