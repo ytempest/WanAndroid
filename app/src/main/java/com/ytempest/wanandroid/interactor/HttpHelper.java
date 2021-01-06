@@ -4,10 +4,11 @@ import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
 import com.ytempest.wanandroid.http.bean.HomeArticleBean;
+import com.ytempest.wanandroid.http.bean.KnowledgeArchitectureBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.bean.MyCollectionBean;
-import com.ytempest.wanandroid.http.bean.OutsideArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.NavigationListBean;
+import com.ytempest.wanandroid.http.bean.OutsideArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 
@@ -38,6 +39,8 @@ public interface HttpHelper {
     Observable<BaseResp<ArticleCollectBean>> cancelCollectArticle(long articleId);
 
     Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(long articleId);
+
+    Observable<BaseResp<List<KnowledgeArchitectureBean>>> getKnowledgeArchitecture();
 
     Observable<BaseResp<List<NavigationListBean>>> getNavigationList();
 

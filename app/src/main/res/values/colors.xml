@@ -25,4 +25,11 @@
     <color name="brown_button">#AA796C</color>
     <color name="brown_button_press">#A17366</color>
     <color name="brown_button_disable">#B19E99</color>
+
+    <array name="knowledge_tabs">
+        <item>#DA8274</item>
+        <item>#78D3A8</item>
+        <item>#C295FC</item>
+        <item>#91CED5</item>
+    </array>
 </resources>
