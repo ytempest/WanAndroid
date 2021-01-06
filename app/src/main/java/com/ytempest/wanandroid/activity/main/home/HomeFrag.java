@@ -14,7 +14,7 @@ import com.ytempest.banner.transformers.Transformers;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.activity.main.home.article.HomeArticleAdapter;
-import com.ytempest.wanandroid.base.load.LoaderFrag;
+import com.ytempest.wanandroid.base.fragment.LoaderFrag;
 import com.ytempest.wanandroid.base.load.ViewType;
 import com.ytempest.wanandroid.helper.ArticleDetailHelper;
 import com.ytempest.wanandroid.http.bean.ArticleDetailBean;

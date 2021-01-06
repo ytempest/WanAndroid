@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.tool.util.DataUtils;
 import com.ytempest.wanandroid.R;
-import com.ytempest.wanandroid.base.load.LoaderFrag;
+import com.ytempest.wanandroid.base.fragment.LoaderFrag;
 import com.ytempest.wanandroid.base.load.ViewType;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 

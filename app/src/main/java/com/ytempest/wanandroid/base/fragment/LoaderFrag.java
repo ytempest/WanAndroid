@@ -1,4 +1,4 @@
-package com.ytempest.wanandroid.base.load;
+package com.ytempest.wanandroid.base.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.ytempest.tool.util.NetUtils;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.fragment.MvpFragment;
+import com.ytempest.wanandroid.base.load.AbsViewType;
+import com.ytempest.wanandroid.base.load.Loader;
+import com.ytempest.wanandroid.base.load.ViewType;
 import com.ytempest.wanandroid.base.presenter.IPresenter;
 
 /**

@@ -10,7 +10,7 @@ import android.view.View;
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.tool.util.LogUtils;
 import com.ytempest.wanandroid.R;
-import com.ytempest.wanandroid.base.load.LoaderFrag;
+import com.ytempest.wanandroid.base.fragment.LoaderFrag;
 import com.ytempest.wanandroid.base.load.ViewType;
 import com.ytempest.wanandroid.http.bean.KnowledgeArchitectureBean;
 import com.ytempest.wanandroid.utils.JSON;
