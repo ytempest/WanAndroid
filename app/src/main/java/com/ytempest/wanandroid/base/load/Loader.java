@@ -1,4 +1,4 @@
-package com.ytempest.wanandroid.base.fragment.load;
+package com.ytempest.wanandroid.base.load;
 
 import android.util.ArrayMap;
 import android.view.LayoutInflater;

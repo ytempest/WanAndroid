@@ -1,4 +1,4 @@
-package com.ytempest.wanandroid.base.fragment.load;
+package com.ytempest.wanandroid.base.load;
 
 import android.content.Intent;
 import android.os.Bundle;
