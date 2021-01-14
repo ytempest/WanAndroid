@@ -37,15 +37,6 @@ public class ProjectContentFrag extends LoaderFrag<ProjectContentPresenter> impl
         return frag;
     }
 
-    private Bundle getBundle() {
-        Bundle bundle = getArguments();
-        if (bundle == null) {
-            bundle = new Bundle();
-            setArguments(bundle);
-        }
-        return bundle;
-    }
-
     @BindView(R.id.group_project_content_list)
     RecyclerView mRecyclerView;
     private ProjectClassifyBean mClassifyBean;

@@ -1,5 +1,6 @@
 package com.ytempest.wanandroid.utils;
 
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -19,8 +20,15 @@ public abstract class CoreFragPagerAdapter<Item> extends FragmentPagerAdapter {
     private final FragmentManager mFragManager;
 
     public CoreFragPagerAdapter(FragmentManager fm) {
+        this(fm, null);
+    }
+
+    public CoreFragPagerAdapter(FragmentManager fm, List<Item> items) {
         super(fm);
         mFragManager = fm;
+        if (!DataUtils.isEmpty(items)) {
+            mData.addAll(items);
+        }
     }
 
     public FragmentManager getFragManager() {

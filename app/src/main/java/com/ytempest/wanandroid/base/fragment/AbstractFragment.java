@@ -21,6 +21,15 @@ public abstract class AbstractFragment extends Fragment {
 
     private Unbinder mBind;
 
+    public Bundle getBundle() {
+        Bundle bundle = getArguments();
+        if (bundle == null) {
+            bundle = new Bundle();
+            setArguments(bundle);
+        }
+        return bundle;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
