@@ -78,7 +78,7 @@ public class ArticleDetailBean {
     }
 
     public boolean isShowCollect() {
-        return source == Source.HOME;
+        return source == Source.HOME || source == Source.KNOWLEDGE;
     }
 
     public String toJson() {
@@ -93,6 +93,10 @@ public class ArticleDetailBean {
         return new ArticleDetailBean(Source.HOME, bean.getId(), bean.getAuthor(), bean.getTitle(), bean.getLink(), bean.isCollect());
     }
 
+    public static ArticleDetailBean from(ArchitectureContentBean.DatasBean bean) {
+        return new ArticleDetailBean(Source.KNOWLEDGE, bean.getId(), bean.getAuthor(), bean.getTitle(), bean.getLink(), bean.isCollect());
+    }
+
     public static ArticleDetailBean from(ProjectContentBean.DatasBean bean) {
         return new ArticleDetailBean(Source.PROJECT, bean.getId(), bean.getAuthor(), bean.getTitle(), bean.getLink(), bean.isCollect());
     }
@@ -103,13 +107,15 @@ public class ArticleDetailBean {
 
     @IntDef({
             Source.HOME,
+            Source.KNOWLEDGE,
             Source.PROJECT,
             Source.NAVIGATION,
     })
     @Retention(RetentionPolicy.SOURCE)
     public @interface Source {
         int HOME = 1;
-        int PROJECT = 2;
-        int NAVIGATION = 3;
+        int KNOWLEDGE = 2;
+        int PROJECT = 3;
+        int NAVIGATION = 4;
     }
 }

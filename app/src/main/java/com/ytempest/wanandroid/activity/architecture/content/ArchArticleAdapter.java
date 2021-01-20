@@ -13,8 +13,10 @@ import com.ytempest.tool.adapter.CoreViewHolder;
 import com.ytempest.tool.helper.ActivityLauncher;
 import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.R;
+import com.ytempest.wanandroid.activity.article.ArticleDetailActivity;
 import com.ytempest.wanandroid.activity.login.LoginActivity;
 import com.ytempest.wanandroid.http.bean.ArchitectureContentBean;
+import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.utils.DateFormat;
 
 /**
@@ -72,6 +74,6 @@ public class ArchArticleAdapter extends CoreRecyclerAdapter<ArchitectureContentB
     protected void onItemClick(CoreViewHolder holder, View view, int position) {
         super.onItemClick(holder, view, position);
         ArchitectureContentBean.DatasBean data = getData(position);
-        // TODO  heqidu:
+        ArticleDetailActivity.start(view.getContext(), ArticleDetailBean.from(data));
     }
 }

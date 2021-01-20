@@ -13,7 +13,9 @@ import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.fragment.LoaderFrag;
 import com.ytempest.wanandroid.base.load.ViewType;
+import com.ytempest.wanandroid.helper.ArticleDetailHelper;
 import com.ytempest.wanandroid.http.bean.ArchitectureContentBean;
+import com.ytempest.wanandroid.http.bean.ArticleDetailBean;
 import com.ytempest.wanandroid.http.bean.KnowledgeArchitectureBean;
 import com.ytempest.wanandroid.utils.JSON;
 import com.ytempest.wanandroid.utils.Utils;
@@ -72,6 +74,16 @@ public class ArchArticleFrag extends LoaderFrag<ArchArticlePresenter> implements
                     if (!mAdapter.isEmpty() && arriveBottom) {
                         mPresenter.loadMoreArchitectureContent(mBean.getId());
                     }
+                }
+            }
+        });
+        ArticleDetailHelper.getInstance().getArticleUpdateDetail().observe(getViewLifecycleOwner(), bean -> {
+            if (bean == null || bean.getSource() != ArticleDetailBean.Source.KNOWLEDGE) return;
+            for (ArchitectureContentBean.DatasBean data : mAdapter.getSrcDataList()) {
+                if (data.getId() == bean.getArticleId()) {
+                    data.setCollect(bean.isCollected());
+                    mAdapter.refresh(data);
+                    return;
                 }
             }
         });
