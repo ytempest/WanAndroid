@@ -15,6 +15,8 @@ public interface IArchArticleContract {
         void onArchArticleCollectSuccess(boolean isCollect, ArchitectureContentBean.DatasBean article);
 
         void onArchArticleCollectFail(boolean isCollect, ArchitectureContentBean.DatasBean article, int code);
+
+        void onRefreshArchitectureFail(int code);
     }
 
     interface Presenter extends IPresenter {

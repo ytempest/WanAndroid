@@ -87,6 +87,11 @@ public class ArchArticleFrag extends LoaderFrag<ArchArticlePresenter> implements
     }
 
     @Override
+    public void onRefreshArchitectureFail(int code) {
+        getLoader().showView(ViewType.ERR);
+    }
+
+    @Override
     public void onLoadArchitectureContent(ArchitectureContentBean content, boolean fromRefresh) {
         getLoader().hideAll();
         if (fromRefresh) {

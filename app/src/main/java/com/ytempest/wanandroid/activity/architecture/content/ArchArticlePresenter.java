@@ -51,7 +51,7 @@ public class ArchArticlePresenter extends BasePresenter<IArchArticleContract.Vie
                     protected void onFail(int code, Throwable e) {
                         super.onFail(code, e);
                         mPageCtrl.moveTo(PageCtrl.State.FAIL);
-                        // TODO  heqidu:
+                        mView.onRefreshArchitectureFail(code);
                     }
                 });
     }
