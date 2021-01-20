@@ -38,6 +38,7 @@ public class NavaigationPresenter extends BasePresenter<INavigationContract.View
 
                     @Override
                     protected void onFail(int code, Throwable e) {
+                        super.onFail(code, e);
                         mView.onNavigationListFail(code);
                     }
                 });
@@ -45,19 +46,17 @@ public class NavaigationPresenter extends BasePresenter<INavigationContract.View
 
     @Override
     public void addCollectOutsideArticle(NavigationListBean.ArticlesBean article) {
-        mView.showLoading();
         mInteractor.getHttpHelper().addCollectOutsideArticle(article.getTitle(), article.getAuthor(), article.getLink())
                 .compose(RxUtils.switchScheduler())
-                .subscribe(new HandlerObserver<OutsideArticleCollectBean>(mView) {
+                .subscribe(new HandlerObserver<OutsideArticleCollectBean>(mView, HandlerObserver.SHOW_LOADING) {
                     @Override
                     protected void onSuccess(@NonNull OutsideArticleCollectBean outsideArticleCollectBean) {
-                        mView.stopLoading();
                         mView.onNavigationArticleCollectSuccess(article);
                     }
 
                     @Override
                     protected void onFail(int code, Throwable e) {
-                        mView.stopLoading();
+                        super.onFail(code, e);
                         // 在这个接口服务器返回-1表示已经收藏过了
                         boolean onceCollected = code == -1;
                         mView.onNavigationArticleCollectFail(code, onceCollected, article);

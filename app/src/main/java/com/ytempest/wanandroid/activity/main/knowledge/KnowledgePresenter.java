@@ -35,6 +35,7 @@ public class KnowledgePresenter extends BasePresenter<IKnowledgeContract.View> i
 
                     @Override
                     protected void onFail(int code, Throwable e) {
+                        super.onFail(code, e);
                         mView.onKnowledgeArchitectureFail(code);
                     }
                 });

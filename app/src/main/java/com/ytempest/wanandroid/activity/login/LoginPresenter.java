@@ -1,8 +1,10 @@
 package com.ytempest.wanandroid.activity.login;
 
+import android.support.annotation.NonNull;
+
 import com.ytempest.wanandroid.base.presenter.BasePresenter;
 import com.ytempest.wanandroid.http.bean.LoginBean;
-import com.ytempest.wanandroid.http.observer.OptionalObserver;
+import com.ytempest.wanandroid.http.observer.HandlerObserver;
 import com.ytempest.wanandroid.interactor.configs.UserConfig;
 import com.ytempest.wanandroid.interactor.impl.BaseInteractor;
 import com.ytempest.wanandroid.utils.RxUtils;
@@ -24,16 +26,20 @@ public class LoginPresenter extends BasePresenter<ILoginContract.View> implement
     public void login(String account, String password) {
         mInteractor.getHttpHelper().login(account, password)
                 .compose(RxUtils.switchScheduler())
-                .subscribe(new OptionalObserver<LoginBean>()
-                        .doOnStart(aVoid -> mView.showLoading())
-                        .doOnCompleted(aVoid -> mView.stopLoading())
-                        .doOnSuccess(loginBean -> {
-                            UserConfig config = mInteractor.getConfigs().getUser();
-                            config.setAccount(loginBean.getUsername());
-                            config.setUserLoginStatus(true);
-                            mView.onLoginSuccess(loginBean);
-                        })
-                        .doOnFail((code, throwable) -> mView.onLoginFail(code, throwable))
-                );
+                .subscribe(new HandlerObserver<LoginBean>(mView, HandlerObserver.SHOW_LOADING) {
+                    @Override
+                    protected void onSuccess(@NonNull LoginBean loginBean) {
+                        UserConfig config = mInteractor.getConfigs().getUser();
+                        config.setAccount(loginBean.getUsername());
+                        config.setUserLoginStatus(true);
+                        mView.onLoginSuccess(loginBean);
+                    }
+
+                    @Override
+                    protected void onFail(int code, Throwable e) {
+                        super.onFail(code, e);
+                        mView.onLoginFail(code, e);
+                    }
+                });
     }
 }

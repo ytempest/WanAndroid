@@ -35,6 +35,7 @@ public class ProjectPresenter extends BasePresenter<IProjectContract.View> imple
 
                     @Override
                     protected void onFail(int code, Throwable e) {
+                        super.onFail(code, e);
                         mView.onProjectClassifyFail(code);
                     }
                 });

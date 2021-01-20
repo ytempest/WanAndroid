@@ -48,7 +48,7 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
                 mInteractor.getHttpHelper().getBannerList(),
                 mInteractor.getHttpHelper().getHomeArticleList(mPageCtrl.getNextPage())
         ).compose(RxUtils.switchScheduler())
-                .subscribe(new HandlerObserver(mView, false) {
+                .subscribe(new HandlerObserver(mView) {
                     private List<BannerBean> mBannerList;
                     private HomeArticleBean mArticleBean;
 
@@ -102,7 +102,7 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
         mInteractor.getHttpHelper().getHomeArticleList(mPageCtrl.getNextPage())
                 .compose(RxUtils.switchScheduler())
                 .filter(mPageCtrl.filterDirtyData())
-                .subscribe(new HandlerObserver<HomeArticleBean>(mView) {
+                .subscribe(new HandlerObserver<HomeArticleBean>(mView, HandlerObserver.SHOW_ERR_MSG) {
                     @Override
                     protected void onSuccess(@NonNull HomeArticleBean homeArticleBean) {
                         mView.displayHomeArticle(false, homeArticleBean);
@@ -127,20 +127,17 @@ public class HomePresenter extends BasePresenter<IHomeContract.View> implements 
             collectObservable = mInteractor.getHttpHelper().cancelCollectArticle(data.getId());
         }
 
-        mView.showLoading();
         collectObservable.compose(RxUtils.switchScheduler())
                 .map(RxUtils.checkArticleCollectData())
-                .subscribe(new HandlerObserver<ArticleCollectBean>(mView, false) {
+                .subscribe(new HandlerObserver<ArticleCollectBean>(mView, HandlerObserver.SHOW_LOADING) {
                     @Override
                     protected void onSuccess(@NonNull ArticleCollectBean bean) {
-                        mView.stopLoading();
                         data.setCollect(isCollect);
                         mView.onArticleCollectSuccess(data);
                     }
 
                     @Override
                     protected void onFail(int code, Throwable e) {
-                        mView.stopLoading();
                         data.setCollect(isCollect);
                         mView.onArticleCollectFail(data, code);
                     }

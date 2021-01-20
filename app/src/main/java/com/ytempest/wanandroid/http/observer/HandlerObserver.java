@@ -1,11 +1,14 @@
 package com.ytempest.wanandroid.http.observer;
 
-import android.support.annotation.StringRes;
-import android.text.TextUtils;
+import android.annotation.SuppressLint;
+import android.support.annotation.IntDef;
 
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.view.IView;
 import com.ytempest.wanandroid.http.ErrCode;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
 /**
  * @author heqidu
@@ -13,46 +16,51 @@ import com.ytempest.wanandroid.http.ErrCode;
  */
 public abstract class HandlerObserver<T> extends BaseObserver<T> {
 
-    private IView mView;
-    @StringRes
-    private Integer mErrMsgId;
-    private String mErrMsg;
-    private boolean showErrMsg;
+    public static final int SHOW_ERR_MSG = 0x000001;
+    public static final int SHOW_LOADING = 0x000010;
 
+    private final IView mView;
+    private final int mFlags;
+
+    @SuppressLint("WrongConstant")
     public HandlerObserver(IView view) {
-        this(view, true);
+        this(view, 0);
     }
 
-    public HandlerObserver(IView view, boolean showErrMsg) {
+    public HandlerObserver(IView view, @Flags int flags) {
         this.mView = view;
-        this.showErrMsg = showErrMsg;
+        this.mFlags = flags;
     }
 
-    public HandlerObserver(IView view, @StringRes int errMsgId) {
-        mView = view;
-        mErrMsgId = errMsgId;
+    private boolean enable(@Flags int flags) {
+        return (mFlags & flags) != 0;
     }
 
-    public HandlerObserver(IView view, String errMsg) {
-        mView = view;
-        mErrMsg = errMsg;
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (enable(SHOW_LOADING)) {
+            mView.showLoading();
+        }
+    }
+
+    @Override
+    public void onComplete() {
+        super.onComplete();
+        if (enable(SHOW_LOADING)) {
+            mView.stopLoading();
+        }
     }
 
     @Override
     protected void onFail(@ErrCode int code, Throwable e) {
         if (mView == null) return;
 
-        if (mErrMsgId != null) {
-            mView.showToast(mErrMsgId);
-            return;
+        if (enable(SHOW_LOADING)) {
+            mView.stopLoading();
         }
 
-        if (!TextUtils.isEmpty(mErrMsg)) {
-            mView.showToast(mErrMsg);
-            return;
-        }
-
-        if (showErrMsg) {
+        if (enable(SHOW_ERR_MSG)) {
             switch (code) {
                 case ErrCode.NET_ERR:
                     mView.showToast(R.string.net_err);
@@ -68,5 +76,13 @@ public abstract class HandlerObserver<T> extends BaseObserver<T> {
                     break;
             }
         }
+    }
+
+    @IntDef({
+            SHOW_ERR_MSG,
+            SHOW_LOADING
+    })
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Flags {
     }
 }

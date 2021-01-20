@@ -49,7 +49,9 @@ public class ArchArticlePresenter extends BasePresenter<IArchArticleContract.Vie
 
                     @Override
                     protected void onFail(int code, Throwable e) {
+                        super.onFail(code, e);
                         mPageCtrl.moveTo(PageCtrl.State.FAIL);
+                        // TODO  heqidu:
                     }
                 });
     }
@@ -60,7 +62,7 @@ public class ArchArticlePresenter extends BasePresenter<IArchArticleContract.Vie
         mPageCtrl.moveTo(PageCtrl.State.LOAD_MORE);
         mInteractor.getHttpHelper().getArchitectureContent(id, mPageCtrl.getNextPage())
                 .compose(RxUtils.switchScheduler())
-                .subscribe(new HandlerObserver<ArchitectureContentBean>(mView, false) {
+                .subscribe(new HandlerObserver<ArchitectureContentBean>(mView) {
                     @Override
                     protected void onSuccess(@NonNull ArchitectureContentBean architectureContentBean) {
                         mPageCtrl.moveTo(PageCtrl.State.SUCCESS);
@@ -84,19 +86,17 @@ public class ArchArticlePresenter extends BasePresenter<IArchArticleContract.Vie
             collectObservable = mInteractor.getHttpHelper().cancelCollectArticle(article.getId());
         }
 
-        mView.showLoading();
         collectObservable.compose(RxUtils.switchScheduler())
                 .map(RxUtils.checkArticleCollectData())
-                .subscribe(new HandlerObserver<ArticleCollectBean>(mView) {
+                .subscribe(new HandlerObserver<ArticleCollectBean>(mView, HandlerObserver.SHOW_LOADING) {
                     @Override
                     protected void onSuccess(@NonNull ArticleCollectBean bean) {
-                        mView.stopLoading();
                         mView.onArchArticleCollectSuccess(isCollect, article);
                     }
 
                     @Override
                     protected void onFail(int code, Throwable e) {
-                        mView.stopLoading();
+                        super.onFail(code, e);
                         mView.onArchArticleCollectFail(isCollect, article, code);
                     }
                 });

@@ -41,19 +41,17 @@ public class ArticleDetailPresenter extends BasePresenter<IArticleDetailContract
             collectObservable = mInteractor.getHttpHelper().cancelCollectArticle(articleId);
         }
 
-        mView.showLoading();
         collectObservable.compose(RxUtils.switchScheduler())
                 .map(RxUtils.checkArticleCollectData())
-                .subscribe(new HandlerObserver<ArticleCollectBean>(mView) {
+                .subscribe(new HandlerObserver<ArticleCollectBean>(mView, HandlerObserver.SHOW_LOADING) {
                     @Override
                     protected void onSuccess(@NonNull ArticleCollectBean bean) {
-                        mView.stopLoading();
                         mView.onArticleCollectSuccess(isCollect, articleId);
                     }
 
                     @Override
                     protected void onFail(int code, Throwable e) {
-                        mView.stopLoading();
+                        super.onFail(code, e);
                         mView.onArticleCollectFail(isCollect, articleId, code);
                     }
                 });
