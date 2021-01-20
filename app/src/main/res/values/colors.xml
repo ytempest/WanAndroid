@@ -32,4 +32,6 @@
         <item>#C295FC</item>
         <item>#91CED5</item>
     </array>
+
+    <color name="arch_indicator">#DA8274</color>
 </resources>

@@ -1,6 +1,7 @@
 package com.ytempest.wanandroid.interactor.impl;
 
 import com.ytempest.wanandroid.http.HttpApi;
+import com.ytempest.wanandroid.http.bean.ArchitectureContentBean;
 import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
@@ -81,6 +82,11 @@ public class HttpHelperImpl implements HttpHelper {
     @Override
     public Observable<BaseResp<List<KnowledgeArchitectureBean>>> getKnowledgeArchitecture() {
         return mHttpApi.getKnowledgeArchitecture();
+    }
+
+    @Override
+    public Observable<BaseResp<ArchitectureContentBean>> getArchitectureContent(int id, int page) {
+        return mHttpApi.getArchitectureContent(page, id);
     }
 
     @Override

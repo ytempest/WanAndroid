@@ -33,6 +33,7 @@
     <string name="share">分享</string>
     <string name="open_it_with_browser">在浏览器打开</string>
     <string name="collect">收藏</string>
+    <string name="cancel_collect">取消收藏</string>
     <string name="collect_fail">收藏失败，重试一下吧~</string>
     <string name="cancel_fail">取消失败，重试一下吧~</string>
     <string name="anonymous_develop">匿名开发</string>

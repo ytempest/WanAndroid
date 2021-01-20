@@ -26,6 +26,12 @@ public class Utils {
         }
     }
 
+    public static boolean isArriveTop(RecyclerView recyclerView) {
+        // RecyclerView.canScrollVertically(1)的值表示是否能向上滚动，false表示已经滚动到底部
+        // RecyclerView.canScrollVertically(-1)的值表示是否能向下滚动，false表示已经滚动到顶部
+        return !recyclerView.canScrollVertically(-1);
+    }
+
     public static boolean isArriveBottom(RecyclerView recyclerView) {
         // RecyclerView.canScrollVertically(1)的值表示是否能向上滚动，false表示已经滚动到底部
         // RecyclerView.canScrollVertically(-1)的值表示是否能向下滚动，false表示已经滚动到顶部

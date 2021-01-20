@@ -1,5 +1,6 @@
 package com.ytempest.wanandroid.http;
 
+import com.ytempest.wanandroid.http.bean.ArchitectureContentBean;
 import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
@@ -7,8 +8,8 @@ import com.ytempest.wanandroid.http.bean.HomeArticleBean;
 import com.ytempest.wanandroid.http.bean.KnowledgeArchitectureBean;
 import com.ytempest.wanandroid.http.bean.LoginBean;
 import com.ytempest.wanandroid.http.bean.MyCollectionBean;
-import com.ytempest.wanandroid.http.bean.OutsideArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.NavigationListBean;
+import com.ytempest.wanandroid.http.bean.OutsideArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;
 import com.ytempest.wanandroid.http.bean.ProjectContentBean;
 
@@ -100,8 +101,18 @@ public interface HttpApi {
 
     /*知识*/
 
+    /**
+     * 获取知识体系大纲
+     */
     @GET("tree/json")
     Observable<BaseResp<List<KnowledgeArchitectureBean>>> getKnowledgeArchitecture();
+
+    /**
+     * 获取指定知识体系下的内容
+     */
+    @GET("article/list/{page}/json")
+    Observable<BaseResp<ArchitectureContentBean>> getArchitectureContent(@Path("page") int page,
+                                                                         @Query("cid") int id);
 
     /*导航*/
 

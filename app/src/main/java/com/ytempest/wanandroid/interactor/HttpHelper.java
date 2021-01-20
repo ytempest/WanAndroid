@@ -1,5 +1,6 @@
 package com.ytempest.wanandroid.interactor;
 
+import com.ytempest.wanandroid.http.bean.ArchitectureContentBean;
 import com.ytempest.wanandroid.http.bean.ArticleCollectBean;
 import com.ytempest.wanandroid.http.bean.BannerBean;
 import com.ytempest.wanandroid.http.bean.BaseResp;
@@ -41,6 +42,8 @@ public interface HttpHelper {
     Observable<BaseResp<ArticleCollectBean>> cancelMyCollectArticle(long articleId);
 
     Observable<BaseResp<List<KnowledgeArchitectureBean>>> getKnowledgeArchitecture();
+
+    Observable<BaseResp<ArchitectureContentBean>> getArchitectureContent(int id, int page);
 
     Observable<BaseResp<List<NavigationListBean>>> getNavigationList();
 

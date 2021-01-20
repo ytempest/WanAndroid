@@ -11,8 +11,8 @@ import android.widget.TextView;
 import com.ytempest.tool.adapter.CoreRecyclerAdapter;
 import com.ytempest.tool.adapter.CoreViewHolder;
 import com.ytempest.tool.util.RandomUtil;
-import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.R;
+import com.ytempest.wanandroid.activity.architecture.ArchitectureActivity;
 import com.ytempest.wanandroid.http.bean.KnowledgeArchitectureBean;
 import com.ytempest.wanandroid.widget.TabFlowLayout;
 
@@ -69,6 +69,6 @@ class ContentAdapter extends CoreRecyclerAdapter<KnowledgeArchitectureBean> {
     protected void onItemClick(CoreViewHolder holder, View view, int position) {
         super.onItemClick(holder, view, position);
         KnowledgeArchitectureBean data = getData(position);
-        ToastUtils.show(view.getContext(), data.getName());
+        ArchitectureActivity.start(view.getContext(), data);
     }
 }
