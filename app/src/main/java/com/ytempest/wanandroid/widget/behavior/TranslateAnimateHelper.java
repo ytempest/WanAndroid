@@ -59,8 +59,8 @@ public class TranslateAnimateHelper implements AnimateHelper {
     private void updateOffsetVal() {
         final float lastOffset = mOffset;
         ViewGroup.MarginLayoutParams lp = (ViewGroup.MarginLayoutParams) mTarget.getLayoutParams();
-        final int totalHeight = lp.topMargin + lp.height + lp.bottomMargin;
-        final int totalWidth = lp.leftMargin + lp.width + lp.rightMargin;
+        final int totalHeight = lp.topMargin + mTarget.getMeasuredHeight() + lp.bottomMargin;
+        final int totalWidth = lp.leftMargin + mTarget.getMeasuredWidth() + lp.rightMargin;
         switch (mSlideDirection) {
             case SLIDE_TO_TOP:
                 mOffset = -totalHeight;

@@ -63,13 +63,13 @@ public abstract class TriggerBehavior<V extends View> extends CoordinatorLayout.
         boolean overSlop = Math.abs(dy) > mTouchSlop || Math.abs(mPerTotalScroll) > mTouchSlop * 2;
         if (dy < 0) {
             if (overSlop || !target.canScrollVertically(-1)) {
-                mAnimateHelper.hide();
+                mAnimateHelper.show();
                 mPerTotalScroll = 0;
             }
 
         } else if (dy > 0) {
             if (overSlop || !target.canScrollVertically(1)) {
-                mAnimateHelper.show();
+                mAnimateHelper.hide();
                 mPerTotalScroll = 0;
             }
         }
