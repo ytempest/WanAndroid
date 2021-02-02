@@ -48,5 +48,6 @@
     <string name="once_collected">你已经收藏过了~</string>
     <string name="collect_success">收藏成功~</string>
     <string name="copy_to_clipboard">已复制到粘贴板</string>
+    <string name="desperately_loading">拼命加载中…</string>
 
 </resources>

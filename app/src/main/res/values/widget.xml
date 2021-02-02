@@ -22,4 +22,10 @@
             <flag name="center" value="0x11" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="JumpingView">
+        <attr name="jump_height" format="dimension" />
+        <attr name="jump_duration" format="integer" />
+        <attr name="shape_size" format="dimension" />
+    </declare-styleable>
 </resources>
