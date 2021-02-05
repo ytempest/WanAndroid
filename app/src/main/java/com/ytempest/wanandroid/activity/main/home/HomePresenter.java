@@ -1,6 +1,6 @@
 package com.ytempest.wanandroid.activity.main.home;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ytempest.tool.util.DataUtils;
 import com.ytempest.wanandroid.base.presenter.BasePresenter;

@@ -9,14 +9,14 @@ buildscript {
     ]
 
     ext.depsVersions = [
-            "supportLib"     : '28.0.0',
-            "arch"           : '1.1.1',
-            "dagger"         : "2.15",
-            "butterknife"    : "8.5.1",
+            "appcompat"      : '1.1.0',
+            "arch"           : '2.0.0',
+            "dagger"         : "2.17",
+            "butterknife"    : "10.0.0",
             "retrofit"       : "2.4.0",
             "rxjava"         : "2.0.2",
             "okhttp"         : "3.9.0",
-            "layout_injector": "1.0",
+            "layout_injector": "1.1",
             "banner"         : "1.0",
             "glide"          : "4.5.0",
     ]
@@ -26,21 +26,18 @@ buildscript {
     ]
 
     ext.androidTestImplementationDeps = [
-            "runner"  : 'com.android.support.test:runner:1.0.2',
-            "espresso": 'com.android.support.test.espresso:espresso-core:3.0.2',
+            "runner"  : 'androidx.test.ext:junit:1.1.1',
+            "espresso": 'androidx.test.espresso:espresso-core:3.1.0',
     ]
 
     ext.implementationDeps = [
-            // support
-            "support-v4"            : "com.android.support:support-v4:${depsVersions.supportLib}",
-            "appcompat-v7"          : "com.android.support:appcompat-v7:${depsVersions.supportLib}",
-            "design"                : "com.android.support:design:${depsVersions.supportLib}",
+            "appcompat"             : "androidx.appcompat:appcompat:${depsVersions.appcompat}",
 
             // arch
-            "runtime"               : "android.arch.lifecycle:runtime:${depsVersions.arch}",
-            "extensions"            : "android.arch.lifecycle:extensions:${depsVersions.arch}",
+            "runtime"               : "androidx.lifecycle:lifecycle-runtime:${depsVersions.arch}",
+            "extensions"            : "androidx.lifecycle:lifecycle-extensions:${depsVersions.arch}",
 
-            "constraint"            : 'com.android.support.constraint:constraint-layout:1.1.3',
+            "constraint"            : 'androidx.constraintlayout:constraintlayout:1.1.3',
             "navigation"            : 'com.ashokvarma.android:bottom-navigation-bar:2.0.0',
 
             // dagger
@@ -74,7 +71,7 @@ buildscript {
     ]
 
     ext.annotationProcessorDeps = [
-            "arch-compiler"       : "android.arch.lifecycle:compiler:${depsVersions.arch}",
+            "arch-compiler"       : "androidx.lifecycle:lifecycle-compiler:${depsVersions.arch}",
             "butterknife-compiler": "com.jakewharton:butterknife-compiler:${depsVersions.butterknife}",
 
             // dagger

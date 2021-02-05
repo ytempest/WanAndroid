@@ -1,6 +1,6 @@
 package com.ytempest.wanandroid.http.bean;
 
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import com.ytempest.wanandroid.utils.JSON;
 

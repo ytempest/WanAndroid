@@ -1,9 +1,6 @@
 package com.ytempest.wanandroid.base.activity;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
 
 import com.ytempest.tool.util.ToastUtils;
 import com.ytempest.wanandroid.base.presenter.IPresenter;
@@ -12,10 +9,14 @@ import com.ytempest.wanandroid.dialog.LoadingDialog;
 
 import javax.inject.Inject;
 
+import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
+import androidx.fragment.app.Fragment;
 import dagger.android.AndroidInjection;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
+
 
 /**
  * @author heqidu

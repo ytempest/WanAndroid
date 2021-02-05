@@ -1,10 +1,10 @@
 package com.ytempest.wanandroid.base;
 
 import android.app.Dialog;
-import android.arch.lifecycle.GenericLifecycleObserver;
-import android.arch.lifecycle.Lifecycle;
+import androidx.lifecycle.GenericLifecycleObserver;
+import androidx.lifecycle.Lifecycle;
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ytempest.layoutinjector.LayoutInjector;
 import com.ytempest.tool.util.LogUtils;

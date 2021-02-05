@@ -1,6 +1,6 @@
 package com.ytempest.wanandroid.http.observer;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ytempest.wanandroid.http.ErrCode;
 import com.ytempest.wanandroid.http.bean.BaseResp;

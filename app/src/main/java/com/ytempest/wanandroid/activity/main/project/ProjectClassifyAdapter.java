@@ -1,7 +1,7 @@
 package com.ytempest.wanandroid.activity.main.project;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.ytempest.wanandroid.activity.main.project.content.ProjectContentFrag;
 import com.ytempest.wanandroid.http.bean.ProjectClassifyBean;

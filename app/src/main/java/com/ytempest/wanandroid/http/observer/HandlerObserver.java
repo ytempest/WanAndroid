@@ -1,7 +1,7 @@
 package com.ytempest.wanandroid.http.observer;
 
 import android.annotation.SuppressLint;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 
 import com.ytempest.wanandroid.R;
 import com.ytempest.wanandroid.base.view.IView;

@@ -1,8 +1,8 @@
 package com.ytempest.wanandroid.utils;
 
 import android.annotation.SuppressLint;
-import android.support.v7.view.menu.MenuBuilder;
-import android.support.v7.widget.RecyclerView;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 
 /**

@@ -1,6 +1,6 @@
 package com.ytempest.wanandroid.di.module.http.event;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 /**
  * @author heqidu

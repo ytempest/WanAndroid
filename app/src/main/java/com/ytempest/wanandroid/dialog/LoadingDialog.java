@@ -1,7 +1,7 @@
 package com.ytempest.wanandroid.dialog;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ytempest.layoutinjector.annotation.InjectLayout;
 import com.ytempest.wanandroid.R;

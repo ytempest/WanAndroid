@@ -1,6 +1,6 @@
 package com.ytempest.wanandroid.http.observer;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ytempest.tool.callback.Callback;
 import com.ytempest.tool.callback.ParamsCallback;

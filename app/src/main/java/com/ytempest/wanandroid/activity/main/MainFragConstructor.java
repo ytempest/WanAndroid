@@ -1,6 +1,6 @@
 package com.ytempest.wanandroid.activity.main;
 
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 
 import com.ytempest.tool.helper.ExpandFragHelper;
 import com.ytempest.wanandroid.activity.main.home.HomeFrag;

@@ -1,6 +1,6 @@
 package com.ytempest.wanandroid.activity.login;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.ytempest.wanandroid.base.presenter.BasePresenter;
 import com.ytempest.wanandroid.http.bean.LoginBean;
